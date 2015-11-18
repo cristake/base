@@ -3,5 +3,11 @@
   "devDependencies": {
     "gulp": "^3.8.8",
     "laravel-elixir": "^2.0.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.0-beta.2",
+    "angular-ui-router": "^0.2.15",
+    "bootstrap": "^3.3.5",
+    "satellizer": "^0.13.0"
   }
 }

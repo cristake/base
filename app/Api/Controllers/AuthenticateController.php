@@ -5,12 +5,11 @@ namespace Api\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\User;
 
-class AuthenticateController extends Controller
+class AuthenticateController extends BaseApiController
 {
 
     public function __construct()
@@ -18,7 +17,8 @@ class AuthenticateController extends Controller
         // Apply the jwt.auth middleware to all methods in this controller
         // except for the authenticate method. We don't want to prevent
         // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        // $this->middleware('jwt.auth', ['except' => ['authenticate']]);
+        $this->middleware('api.auth', ['except' => ['authenticate']]);
     }
 
     /**
