@@ -16,8 +16,8 @@
         vm.getUsers = function() {
 
             //Grab the list of users from the API
-            $http.get('api/authenticate').success(function(users) {
-                vm.users = users;
+            $http.get('api/users').success(function(users) {
+                vm.users = users.data;
             }).error(function(error) {
                 vm.error = error;
             });

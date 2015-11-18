@@ -2,10 +2,20 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\User;
 
 class DatabaseSeeder extends Seeder
 {
+    protected $tables = [
+        'users',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $seeders = [
+        'UserTableSeeder',
+    ];
+
     /**
      * Run the database seeds.
      *
@@ -15,21 +25,27 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        DB::table('users')->delete();
+        $this->cleanDatabase();
 
-        $users = array(
-                ['name' => 'Ryan Chenkie', 'email' => 'ryanchenkie@gmail.com', 'password' => Hash::make('secret')],
-                ['name' => 'Chris Sevilleja', 'email' => 'chris@scotch.io', 'password' => Hash::make('secret')],
-                ['name' => 'Holly Lloyd', 'email' => 'holly@scotch.io', 'password' => Hash::make('secret')],
-                ['name' => 'Adnan Kukic', 'email' => 'adnan@scotch.io', 'password' => Hash::make('secret')],
-        );
-            
-        // Loop through each user above and create the record for them in the database
-        foreach ($users as $user)
+        foreach ($this->seeders as $seedClass)
         {
-            User::create($user);
+            $this->call($seedClass);
         }
 
         Model::reguard();
     }
+
+    /**
+     * Clean out the database for a new seed generation.
+     */
+    private function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        foreach ($this->tables as $table)
+        {
+            DB::table($table)->truncate();
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
+
 }

@@ -5,11 +5,16 @@
 | Api Routes
 |--------------------------------------------------------------------------
 */
-$api = app('Dingo\Api\Routing\Router');
+$api = app('api.router');
 
-$api->group(['version' => 'v1'], function($api)
+$api->version('v1', function ($api)
 {
-	$api->get('authenticate', 'Api\Controllers\AuthenticateController@index');
-	$api->post('authenticate', 'Api\Controllers\AuthenticateController@authenticate');
-	$api->get('authenticate/user', 'Api\Controllers\AuthenticateController@getAuthenticatedUser');
+	$api->group(['namespace' => 'Api\Controllers'], function ($api)
+	{
+		$api->post('authenticate', 'AuthenticateController@authenticate');
+		$api->get('users/me', 'UserController@getAuthenticatedUser');
+
+		$api->get('users', 'UserController@index');
+		// $api->get('users/{id}', 'UserController@show');
+	});
 });

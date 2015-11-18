@@ -5,7 +5,8 @@
 | Application Routes
 |--------------------------------------------------------------------------
 */
-Route::get('/', function () {
+get('/', function () {
+    // return view('welcome');
     return view('index');
 });
 
