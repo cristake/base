@@ -12,17 +12,13 @@ use Api\Transformers\UserTransformer;
 
 class UserController extends BaseApiController
 {
-
     public function __construct()
     {
-        // Apply the jwt.auth middleware to all methods in this controller
-        // except for the authenticate method. We don't want to prevent
-        // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth');
+        // $this->middleware('jwt.auth');
     }
 
     /**
-     * Return the users
+     * Display a listing of the resource.
      *
      * @return Response
      */
@@ -37,14 +33,31 @@ class UserController extends BaseApiController
         return $this->response->collection($users, new UserTransformer)->setMeta($meta);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
     public function show($id)
     {
         $user = User::findOrFail($id);
 
+        // if ( ! $this->auth->user() ) {
+        //     $hidden = $user->getHidden();
+
+        //     $user->setHidden(array_merge($hidden, ['email']));
+        // }
+        // return $user;
+
         return $this->response->item($user, new UserTransformer);
     }
 
-
+    /**
+     * Display theauthenticated user
+     *
+     * @return Response
+     */
     public function getAuthenticatedUser()
     {
         try {

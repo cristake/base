@@ -44,7 +44,4 @@ class AuthenticateController extends Controller
         return response()->json(compact('token'));
     }
 
-    // public function validateToken(){
-    //     return response()->array(['status' => 'success'])->statusCode(200);
-    // }
 }

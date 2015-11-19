@@ -5,8 +5,7 @@
 | Application Routes
 |--------------------------------------------------------------------------
 */
-get('/', function () {
-    // return view('welcome');
-    return view('index');
-});
 
+// $router->group(['middleware' => 'jwt.refresh'], function() {
+	get('/', 'HomeController@index');
+// });
