@@ -150,7 +150,6 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
-        Frozennode\Administrator\AdministratorServiceProvider::class,
 
     ],
 
