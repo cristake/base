@@ -136,6 +136,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -150,6 +151,9 @@ return [
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Lavary\Menu\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 
@@ -179,6 +183,7 @@ return [
         'Eloquent'      => Illuminate\Database\Eloquent\Model::class,
         'Event'         => Illuminate\Support\Facades\Event::class,
         'File'          => Illuminate\Support\Facades\File::class,
+        'Gate'          => Illuminate\Support\Facades\Gate::class,
         'Hash'          => Illuminate\Support\Facades\Hash::class,
         'Input'         => Illuminate\Support\Facades\Input::class,
         'Inspiring'     => Illuminate\Foundation\Inspiring::class,
@@ -202,9 +207,13 @@ return [
         /*
          * 3rd Party Aliases...
          */
+        'Form'          => Illuminate\Html\FormFacade::class,
+        'HTML'          => Illuminate\Html\HtmlFacade::class,
         'JWTAuth'       => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'    => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Bouncer'       => Silber\Bouncer\BouncerFacade::class,
+        'Alert'         => UxWeb\SweetAlert\SweetAlert::class,
+        'Sidebar'       => Lavary\Menu\Facade::class,
 
     ],
 

@@ -7,15 +7,19 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
+        "illuminate/html" : "5.*",
         "tymon/jwt-auth": "0.5.*",
         "dingo/api": "1.0.x@dev",
-        "silber/bouncer": "^0.0.20"
+        "silber/bouncer": "^0.0.20",
+        "uxweb/sweet-alert": "^1.1",
+        "lavary/laravel-menu": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "barryvdh/laravel-debugbar": "~2.0"
     },
     "autoload": {
         "classmap": [

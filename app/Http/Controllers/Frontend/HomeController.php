@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 use App\Http\Requests;
 use JWTAuth;
 
@@ -15,10 +16,9 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        // $users = $this->api->get('api/users?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXUyJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6XC9cL2Jhc2UuZGV2XC9hcGlcL2F1dGhlbnRpY2F0ZSIsImlhdCI6IjE0NDc5MjQzNzkiLCJleHAiOiIxNDQ3OTI3OTc5IiwibmJmIjoiMTQ0NzkyNDM3OSIsImp0aSI6ImFjNDA3YWRlZDFhZjg4ODQ4M2ExMzU0ZDkxMmI2YjdlIn0.MTQzODM0YzE4MDg2YTUyOWNiYjI2ODJlNjRmYmIyZTdmOGRkMWE3ZTA5ZTViODhlNjE2NjViN2NlYjQyZDA4ZQ');
         $users = $this->api->get('api/users');
 
-        return view('welcome', compact('users'));
+        return view('_frontend.home.index', compact('users'));
     }
 
     /**
