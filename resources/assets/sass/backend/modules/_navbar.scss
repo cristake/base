@@ -1,0 +1,40 @@
+/*Navbar*/
+
+.navbar {
+	border: 0;
+}
+
+.navbar-inverse {
+        background-color: $primary;
+    }
+
+.navbar input {
+	border: 0;
+	background: $dark-gray;
+	color: $white;
+}
+
+.navbar input:focus {
+	color: $white;
+	background: $dark-gray;
+	border: 1px solid $primary;
+	outline: 0;
+	box-shadow: inset 0px 0px 0px 1px $primary;
+}
+
+.user-menu {
+	display: inline-block;
+	margin-top: 14px;
+	margin-right: 10px;
+	float: right;
+	list-style: none;
+	padding: 0;
+}
+
+.user-menu a {
+	color: $white;
+}
+
+.user-menu a:hover, .user-menu a:focus {
+	text-decoration: none;
+}

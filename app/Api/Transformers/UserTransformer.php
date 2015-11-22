@@ -13,20 +13,20 @@ class UserTransformer extends TransformerAbstract
      *
      * @var array
      */
-    // protected $defaultIncludes = [
-    //     'roles',
-    //     'abilities',
-    // ];
+    protected $defaultIncludes = [
+        'roles',
+        'abilities',
+    ];
 
     /**
      * List of resources possible to include
      *
      * @var array
      */
-    protected $availableIncludes = [
-        'roles',
-        'abilities',
-    ];
+    // protected $availableIncludes = [
+    //     'roles',
+    //     'abilities',
+    // ];
 
     /**
      * Turn this item object into a generic array
@@ -40,9 +40,8 @@ class UserTransformer extends TransformerAbstract
             'name'          => $user->name,
             'email'         => $user->email,
             'active'        => (boolean) $user->status,
-            'site_admin'    => $user->is('admin'),
-            'created_at'	=> $user->created_at->format('d-m-Y'),
-            'updated_at'	=> $user->updated_at->format('d-m-Y'),
+            'created_at'	=> $user->created_at->format('d-m-Y H:i:s'),
+            'updated_at'	=> $user->updated_at->format('d-m-Y H:i:s'),
             'links'         => [
                 'rel'   => 'self',
                 'uri'   => route('api.users.show', $user->id)

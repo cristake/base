@@ -1,0 +1,40 @@
+/*Charts*/
+
+.main-chart {
+	background: $white;
+}
+
+.easypiechart-panel {
+	text-align: center;
+	padding: 1px 0;
+	margin-bottom: 20px;
+}
+
+.placeholder h2 {
+	margin-bottom: 0px;
+}
+
+.donut {
+	width: 100%;
+}
+
+.easypiechart {
+	position: relative;
+	text-align: center;
+	width: 120px;
+	height: 120px;
+	margin: 20px auto 10px auto;
+}
+
+.easypiechart .percent {
+	display: block;
+	position: absolute;
+	font-size: 26px;
+	top: 38px;
+	width: 120px;
+}
+
+#easypiechart-blue .percent { color: $primary;}
+#easypiechart-teal .percent { color: $teal;}
+#easypiechart-orange .percent { color: $warning;}
+#easypiechart-red .percent { color: $danger;}

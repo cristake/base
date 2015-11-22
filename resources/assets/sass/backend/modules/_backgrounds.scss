@@ -1,0 +1,49 @@
+/*Backgrounds*/
+
+.bg-primary {
+	color: $dark-blue;
+	background-color: $default;
+}
+a.bg-primary:hover {
+	background-color: $default;
+}
+.bg-success {
+	color: $white;
+	background-color: $success;
+}
+a.bg-success:hover {
+	background-color: $success;
+}
+.bg-success a {
+	color: rgba(255, 255, 255, .75);
+}
+.bg-info {
+	color: $white;
+	background-color: $primary;
+}
+a.bg-info:hover {
+	background-color: $primary;
+}
+.bg-info a {
+	color: rgba(255, 255, 255, .75);
+}
+.bg-warning {
+	color: $white;
+	background-color: $warning;
+}
+a.bg-warning:hover {
+	background-color: $warning;
+}
+.bg-warning a {
+	color: rgba(255, 255, 255, .75);
+}
+.bg-danger {
+	color: $white;
+	background-color: $danger;
+}
+a.bg-danger:hover {
+	background-color: $danger;
+}
+.bg-danger a {
+	color: rgba(255, 255, 255, .75);
+}

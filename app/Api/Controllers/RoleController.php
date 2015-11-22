@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use Api\Transformers\RoleTransformer;
 
-class RoleController extends BaseApiController
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.

@@ -1,0 +1,38 @@
+/*Tables*/
+.table {
+	background: $white;
+}
+
+.fixed-table-container {
+	border: 1px solid $light-gray;
+}
+
+.fixed-table-container thead th {
+	background: $light-gray;
+	border-color: $light-gray;
+	color: $dark-gray;
+	font-weight: 300;
+	font-size: 16px;
+}
+
+.fixed-table-container tbody td {
+	border: 1px solid $light-gray;
+}
+
+.fixed-table-container tbody td:last-child {
+	border-right: none;
+}
+
+.table>thead>tr>th {
+	border-bottom: 1px solid $light-gray;
+	vertical-align: middle;
+	height: 50px;
+}
+
+.fixed-table-pagination .pagination {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.fixed-table-pagination .pagination-detail {
+	margin-top: 20px;
+}

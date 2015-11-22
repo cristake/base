@@ -1,0 +1,41 @@
+{
+  "name": "tinymce",
+  "version": "4.2.8",
+  "description": "Web based JavaScript HTML WYSIWYG editor control.",
+  "license": "LGPL-2.1",
+  "keywords": [
+    "editor",
+    "wysiwyg",
+    "tinymce",
+    "richtext",
+    "javascript",
+    "html"
+  ],
+  "bugs": {
+    "url": "http://www.tinymce.com/develop/bugtracker.php"
+  },
+  "gitHead": "6d516557b3ef4a79e125892adab5f6dc6ebba63e",
+  "_id": "tinymce@4.2.8",
+  "scripts": {},
+  "_shasum": "9a22dd7c27830dfa201766454911034aba68b795",
+  "_from": "tinymce@4.2.8",
+  "_npmVersion": "2.11.3",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "spocke",
+    "email": "spocke@moxiecode.com"
+  },
+  "dist": {
+    "shasum": "9a22dd7c27830dfa201766454911034aba68b795",
+    "tarball": "http://registry.npmjs.org/tinymce/-/tinymce-4.2.8.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "spocke",
+      "email": "spocke@moxiecode.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/tinymce/-/tinymce-4.2.8.tgz",
+  "readme": "ERROR: No README data found!"
+}

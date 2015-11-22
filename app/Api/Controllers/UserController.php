@@ -5,12 +5,13 @@ namespace Api\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\User;
 use Api\Transformers\UserTransformer;
 
-class UserController extends BaseApiController
+class UserController extends Controller
 {
     public function __construct()
     {
@@ -51,6 +52,18 @@ class UserController extends BaseApiController
         // return $user;
 
         return $this->response->item($user, new UserTransformer);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $user = new User;
+        $user->create($request->all());
     }
 
     /**

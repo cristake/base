@@ -22,22 +22,27 @@ class SidebarMiddleware
                 // ->prepend('<i class="fa fa-tachometer"></i>')
                 ->prepend('<svg class="glyph stroked dashboard dial"><use xlink:href="#stroked-dashboard-dial"/></svg>')
                 ->data('visible', true);
+            $menu->dashboard->divide();
 
             /*
-             * DISPLAY ALL USERS
+             * USERS
              */
             // if( Gate::check('view_users') )
             // {
-                $menu->add('Utilizatori', ['route' => 'users'])
+                $menu->add('Utilizatori', '#sub-menu-utilizatori')
                     ->prepend('<svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>')
-                    // ->prepend('<i class="fa fa-users"></i>')
-                    ->active('admin/users/*')
+                    ->append('<i class="fa fa-chevron-right pull-right"></i> ')
                     ->data('visible', true);
-
-                    // // DISPLAY OUR TEAM MEMBERS
-                    // $menu->add('Roluri', ['route' => 'users', 'parent' => $menu->utilizatori->id])
-                    //     ->active('admin/users/roles/*')
-                    //     ->data('visible', true);
+                    // POSTS
+                    $menu->add('Lista', ['route' => 'users', 'parent' => $menu->utilizatori->id])
+                        ->active()
+                        // ->active('admin/users/list/*')
+                        ->data('visible', true);
+                    // CNDIDATES
+                    $menu->add('Roluri', ['route' => 'users', 'parent' => $menu->utilizatori->id])
+                        ->active()
+                        // ->active('admin/users/roles/*')
+                        ->data('visible', true);
             // }
 
         });

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 
 /**
  * Class FrontendController
  * @package App\Http\Controllers
  */
-class DashboardController extends BaseController
+class DashboardController extends Controller
 {
 	/**
 	 * @return \Illuminate\View\View

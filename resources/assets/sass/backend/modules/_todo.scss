@@ -1,0 +1,47 @@
+/*Todo List Widget*/
+
+.todo-list-item .glyphicon { 
+	margin-right:5px; 
+	color: $medium-gray; 
+}
+
+.todo-list-item .glyphicon:hover { 
+	margin-right:5px; 
+	color: $dark-blue; 
+}
+
+.todo-list { 
+	padding: 0;
+	margin: -15px;
+	background: $white;
+	color: $dark-gray;
+}
+
+#checkbox {
+	margin: 0;
+}
+
+.todo-list .checkbox { 
+	display:inline-block; 
+	margin: 0px;
+}
+
+.panel-body input[type=checkbox]:checked + label { 
+	text-decoration: line-through;
+	color: $medium-gray; 
+}
+
+.todo-list-item {
+	list-style: none;
+	line-height: 0.9;
+	padding: 14px 15px 8px 15px;
+}
+
+.todo-list-item:hover, a.todo-list-item:focus {
+	text-decoration: none;
+	background-color: $light-gray;
+}
+
+.todo-list-item .trash .glyph:hover {
+	color: $danger;
+}

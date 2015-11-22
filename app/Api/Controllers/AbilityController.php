@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Ability;
 use Api\Transformers\AbilityTransformer;
 
-class AbilityController extends BaseApiController
+class AbilityController extends Controller
 {
     /**
      * Display a listing of the resource.

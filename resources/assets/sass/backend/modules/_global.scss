@@ -1,0 +1,93 @@
+/*Global Styles*/
+
+body {
+	background: $light-gray;
+	padding-top: 50px;
+	color: $dark-gray;
+}
+
+p {
+	color: $medium-gray;
+}
+
+a, a:hover, a:focus {
+	color: $primary;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $dark-gray;
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 40px;
+}
+
+h2 {
+	font-weight: 300;
+	margin-bottom: 20px;
+}
+
+h3, h4 {
+	font-weight: 300;
+}
+
+.large {
+	font-size: 2em;
+}
+
+.text-muted {
+	color: $medium-gray;
+}
+
+.color-gray { color: $dark-gray; }
+.color-blue { color: $primary; }
+.color-teal { color: $teal; }
+.color-orange { color: $warning; }
+.color-red { color: $danger; }
+
+.bg-primary .glyphicon-remove { color: $dark-gray;}
+.bg-primary .glyphicon-remove:hover { color: $danger;}
+
+.no-padding {
+	padding: 0; margin: 0;
+}
+
+.glyphicon-xl {
+	font-size: 6em;
+}
+
+.glyphicon-l {
+	font-size: 3em;
+}
+
+.glyphicon-m {
+	font-size: 1.5em;
+}
+
+.glyphicon-s {
+	font-size: 0.75em;
+}
+
+.form-control {
+	border: 1px solid $light-gray;
+	box-shadow: none;
+}
+
+.form-control:focus {
+	border: 1px solid $primary;
+	outline: 0;
+	box-shadow: inset 0px 0px 0px 1px $primary;
+}
+
+.navbar-header .navbar-brand {
+	color: $white;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-weight: 500;
+	letter-spacing: 2px;
+}
+
+.navbar-header .navbar-brand span {
+	color: $primary;
+}

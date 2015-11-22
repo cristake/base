@@ -12,18 +12,18 @@ class RoleTransformer extends TransformerAbstract
      *
      * @var array
      */
-    // protected $defaultIncludes = [
-    //     'abilities'
-    // ];
+    protected $defaultIncludes = [
+        'abilities'
+    ];
 
     /**
      * List of resources possible to include
      *
      * @var array
      */
-    protected $availableIncludes = [
-        'abilities'
-    ];
+    // protected $availableIncludes = [
+    //     'abilities'
+    // ];
 
     /**
      * Turn this item object into a generic array
