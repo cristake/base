@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Contracts\Factory as Socialite;
 use Auth;
 
 class AuthController extends Controller
@@ -17,14 +18,34 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    protected $socialite;
+
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(Socialite $socialite) {
+        $this->socialite = $socialite;
         $this->middleware('guest', ['except' => 'getLogout']);
+    }
+
+
+    public function getSocialAuth($provider=null)
+    {
+        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+        // dd($provider);
+
+        return $this->socialite->with($provider)->redirect();
+    }
+
+
+    public function getSocialAuthCallback($provider=null)
+    {
+        if($user = $this->socialite->with($provider)->user())
+            dd($user->nickname);
+        else
+            return 'something went wrong';
     }
 
     /**
@@ -34,7 +55,6 @@ class AuthController extends Controller
     {
         return view('_backend.auth.login');
     }
-
 
     /**
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|string

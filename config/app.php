@@ -154,6 +154,7 @@ return [
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -214,6 +215,7 @@ return [
         'Bouncer'       => Silber\Bouncer\BouncerFacade::class,
         'Alert'         => UxWeb\SweetAlert\SweetAlert::class,
         'Sidebar'       => Lavary\Menu\Facade::class,
+        'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
 
     ],
 

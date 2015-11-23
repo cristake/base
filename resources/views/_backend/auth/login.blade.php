@@ -35,6 +35,8 @@
 						</div>
 
 						{!! Form::submit('Login', ['class' => 'btn btn-primary', 'style' => 'margin-right:15px']) !!}
+						<a href="{!! url('admin/login/facebook') !!}" class="btn btn-primary">Facebook Login</a>
+						<a href="{!! url('admin/login/twitter') !!}" class="btn btn-primary">Twitter Login</a>
 					{!! Form::close() !!}
 
 				</div>
