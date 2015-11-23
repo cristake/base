@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUsersRequest;
+use App\Models\User;
 
 /**
  * Class FrontendController
@@ -112,14 +115,14 @@ class UserController extends Controller
      */
     public function mark(Request $request, $id, $status)
     {
-        // $user = User::findOrFail($id);
-        // $user->status = $status;
-        // $user->update();
+        $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
 
-        // $message = ( "Utilizatorul '". $user->name ."' a fost " . ($user->status == 1 ? "activat!" : "dezactivat!") );
-        // alert()->success($message, 'Succes!');
+        $user = User::findOrFail($id);
 
-        // return redirect()->back();
+        $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($user->status == 1 ? "activat!" : "dezactivat!")) );
+        alert()->success($message, 'Succes!');
+
+        return redirect()->back();
     }
 
 }

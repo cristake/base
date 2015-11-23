@@ -34,6 +34,13 @@
 	}
 }
 
+.sidebar ul.nav a, 
+.sidebar ul.nav li.parent ul li a {
+	text-decoration: none;
+	color: $white;
+	background-color: $primary;
+}
+
 .sidebar ul.nav a:hover, 
 .sidebar ul.nav li.parent ul li a:hover {
 	text-decoration: none;

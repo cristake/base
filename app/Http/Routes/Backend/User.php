@@ -1,6 +1,6 @@
 <?php
 
-	get('users/list', 'UserController@index')->name('users');
+	get('users', 'UserController@index')->name('users');
 
 	get('users/create', 'UserController@create')->name('users_create');
 	post('users/store', 'UserController@store')->name('users_store');
@@ -12,4 +12,4 @@
 
 	get('users/{id}/destroy', 'UserController@destroy')->name('users_destroy');
 
-	put('users/{id}/mark/{status}', 'UserController@mark')->name('mark_users');
+	get('users/{id}/mark/{status}', 'UserController@mark')->name('mark_users');

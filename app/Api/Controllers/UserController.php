@@ -67,6 +67,19 @@ class UserController extends Controller
     }
 
     /**
+     * Mark user as inactive
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function mark(Request $request, $id, $status)
+    {
+        $user = User::findOrFail($id);
+        $user->status = $status;
+        $user->update();
+    }
+
+    /**
      * Display theauthenticated user
      *
      * @return Response

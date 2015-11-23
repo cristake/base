@@ -22,7 +22,7 @@ class SidebarMiddleware
                 // ->prepend('<i class="fa fa-tachometer"></i>')
                 ->prepend('<svg class="glyph stroked dashboard dial"><use xlink:href="#stroked-dashboard-dial"/></svg>')
                 ->data('visible', true);
-            $menu->dashboard->divide();
+            // $menu->dashboard->divide();
 
             /*
              * USERS
@@ -35,14 +35,12 @@ class SidebarMiddleware
                     ->data('visible', true);
                     // POSTS
                     $menu->add('Lista', ['route' => 'users', 'parent' => $menu->utilizatori->id])
-                        ->active()
-                        // ->active('admin/users/list/*')
+                        ->active('admin/users/*')
                         ->data('visible', true);
-                    // CNDIDATES
-                    $menu->add('Roluri', ['route' => 'users', 'parent' => $menu->utilizatori->id])
-                        ->active()
-                        // ->active('admin/users/roles/*')
-                        ->data('visible', true);
+                    // // ROLES
+                    // $menu->add('Roluri', ['route' => 'users', 'parent' => $menu->utilizatori->id])
+                    //     ->active('admin/users/*')
+                    //     ->data('visible', true);
             // }
 
         });

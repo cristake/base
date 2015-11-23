@@ -15,6 +15,8 @@ $api->version('v1', function ($api)
 		// $api->get('users/me', 'UserController@getAuthenticatedUser');
 
 		$api->resource('users', 'UserController');
+		$api->get('users/{id}/mark/{status}', 'UserController@mark');
+
 		$api->resource('roles', 'RoleController');
 		$api->resource('abilities', 'AbilityController');
 	});

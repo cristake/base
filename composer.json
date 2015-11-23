@@ -12,7 +12,8 @@
         "dingo/api": "1.0.x@dev",
         "silber/bouncer": "^0.0.20",
         "uxweb/sweet-alert": "^1.1",
-        "lavary/laravel-menu": "dev-master"
+        "lavary/laravel-menu": "dev-master",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

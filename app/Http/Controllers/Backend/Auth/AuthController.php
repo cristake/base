@@ -12,8 +12,8 @@ use Auth;
 class AuthController extends Controller
 {
     protected $loginPath = 'admin/login';
-    // protected $redirectPath = 'admin';
-    // protected $redirectAfterLogout = 'admin/login';
+    protected $redirectPath = 'admin';
+    protected $redirectAfterLogout = 'admin/login';
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 

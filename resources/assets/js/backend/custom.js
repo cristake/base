@@ -26,3 +26,19 @@ $(document).ready(function() {
 		utilizatori_icon.addClass("fa-chevron-down");
 	}
 });
+
+////////////////////////////
+// Tooltip
+////////////////////////////
+$(function () {
+	$('[data-toggle="tooltip"]').tooltip();
+});
+
+////////////////////////////
+// Mesaje de alerta
+////////////////////////////
+$(function() {
+    setTimeout(function() {
+		$('.alert').delay(5000).slideUp('slow');
+    }, 3000);
+});

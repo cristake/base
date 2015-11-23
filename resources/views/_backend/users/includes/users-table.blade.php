@@ -3,8 +3,8 @@
 	data-data-type="json"
 	data-toggle="table"
 	data-url="{{ url('api/users') }}"
+	data-toolbar="#toolbar"
 	data-show-refresh="true"
-	data-show-columns="true"
 	data-search="true"
 	data-select-item-name="toolbar1"
 	data-pagination="true"
@@ -18,7 +18,7 @@
 	        <th data-field="email" data-align="center" data-valign="middle" data-sortable="true">Email</th>
 	        <th data-field="active" data-align="center" data-valign="middle" data-sortable="true" data-formatter="StatusFormatter">Status</th>
 	        <th data-field="updated_at" data-align="center" data-valign="middle" data-sortable="true">Ultima logare</th>
-	        <th data-field="actions" data-align="center" data-valign="middle" data-sortable="false">Actions</th>
+	        <th data-field="actions" data-align="center" data-valign="middle" data-sortable="false" data-formatter="ActionsFormatter">Actiuni</th>
 	    </tr>
     </thead>
 </table>

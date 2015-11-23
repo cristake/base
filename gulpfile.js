@@ -24,6 +24,10 @@ elixir(function(mix) {
 		.copy('node_modules/jquery/dist/jquery.js', 'resources/assets/js/vendor/jquery.js')
 		.copy('node_modules/jquery.cookie/jquery.cookie.js', 'resources/assets/js/vendor/jquery.cookie.js')
 
+		// Copy Sweetalert Files
+		.copy('node_modules/sweetalert/sweetalert.css', 'resources/assets/css/vendor/sweetalert.css')
+		.copy('node_modules/sweetalert/sweetalert.min.js', 'resources/assets/js/vendor/sweetalert.min.js')
+
 
 		// Process back-end stylesheets
 		.sass([
@@ -33,6 +37,7 @@ elixir(function(mix) {
 		// Combine pre-processed back-end CSS files
 		.styles([
 			'vendor/bootstrap-table.min.css',
+			'vendor/sweetalert.css',
 			'backend/main.css',
 		], 'public/css/backend.css')
 
@@ -44,6 +49,7 @@ elixir(function(mix) {
 			'vendor/bootstrap-table-ro-RO.min.js',
 			'backend/vendor/lumino.glyphs.js',
 			'vendor/jquery.cookie.js',
+			'vendor/sweetalert.min.js',
 			'backend/custom.js'
 		], 'public/js/backend.js')
 
