@@ -7,46 +7,62 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Laravel\Socialite\Contracts\Factory as Socialite;
+// use Laravel\Socialite\Contracts\Factory as Socialite;
 use Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
     protected $loginPath = 'admin/login';
     protected $redirectPath = 'admin';
     protected $redirectAfterLogout = 'admin/login';
+    // protected $socialite;
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    protected $socialite;
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct(Socialite $socialite) {
-        $this->socialite = $socialite;
+    public function __construct()
+    // public function __construct(Socialite $socialite)
+    {
+        // $this->socialite = $socialite;
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-
-    public function getSocialAuth($provider=null)
+    public function login(AuthenticateUser $authenticateUser, Request $request, $provider = null)
     {
-        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
-        // dd($provider);
-
-        return $this->socialite->with($provider)->redirect();
+        return $authenticateUser->execute($request->all(), $this, $provider);
     }
 
-
-    public function getSocialAuthCallback($provider=null)
+    public function userHasLoggedIn($user)
     {
-        if($user = $this->socialite->with($provider)->user())
-            dd($user->nickname);
-        else
-            return 'something went wrong';
+        // \Session::flash('message', 'Welcome, ' . $user->username);
+        alert()->success( sprintf('Bine ai venit, %s', $user->name), 'Succes!' );
+
+        return redirect('/admin');
     }
+
+    // public function getSocialAuth($provider=null)
+    // {
+    //     if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+
+    //     return $this->socialite->with($provider)->redirect();
+    // }
+
+
+    // public function getSocialAuthCallback($provider=null)
+    // {
+    //     if($user = $this->socialite->with($provider)->user())
+    //     {
+    //         dd($user);
+    //     }
+
+    //     return 'something went wrong';
+    // }
 
     /**
      * @return \Illuminate\View\View
@@ -80,7 +96,7 @@ class AuthController extends Controller
         } 
 
         alert()->error('Datele tale nu sunt corecte!', 'Eroare!');
-        return redirect()->route('login');
+        return redirect()->route('backend_login');
     }
 
 }

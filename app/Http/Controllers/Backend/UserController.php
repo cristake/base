@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUsersRequest;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 
 /**
@@ -40,7 +41,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUsersRequest $request)
+    public function store(CreateUserRequest $request)
     {
     	$this->api->post('api/users', $request->all());
 
@@ -56,7 +57,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // return $this->api->get('api/users/' . $id);
     }
 
     /**
@@ -67,9 +68,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // $user = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-        // return view('backend.users.edit', compact('user'));
+        return view('_backend.users.edit', compact('user'));
     }
 
     /**
@@ -79,17 +80,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsersRequest $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        // $user = User::findOrFail($id);
-        // $user->update($request->all());
+        $this->api->put('api/users/'. $id, $request->all());
 
-        // alert()->success("Utilizatorul '". $user->name ."' a fost editat!", 'Succes!');
-
-        // if( Auth::user()->can('view_users') )
-        //     return redirect()->route('users');
-        // else
-        //     return redirect()->back();
+        alert()->success(sprintf("Utilizatorul %s a fost editat!", $request->get('name')), 'Succes!');
+        return redirect()->route('users');
     }
 
     /**
@@ -100,11 +96,12 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        // $user = User::findOrFail($id);
-        // $user->destroy($id);
+        $user = User::findOrFail($id);
 
-        // alert()->success("Utilizatorul '". $user->name ."' a fost sters!", 'Succes!');
-        // return redirect()->route('users');
+        $this->api->delete('api/users/'. $id);
+
+        alert()->success( sprintf('Utilizatorul %s a fost sters!', $user->name), 'Succes!' );
+        return redirect()->route('users');
     }
 
     /**

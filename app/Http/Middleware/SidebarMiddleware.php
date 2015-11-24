@@ -17,32 +17,54 @@ class SidebarMiddleware
     {
         Sidebar::make('sidebar', function($menu)
         {
-            // DASHBOARD
+            /*
+            |--------------------------------------------------------------------------
+            | DASHBOARD
+            |--------------------------------------------------------------------------
+            */
             $menu->add('Dashboard', ['route' => 'dashboard'])
                 // ->prepend('<i class="fa fa-tachometer"></i>')
                 ->prepend('<svg class="glyph stroked dashboard dial"><use xlink:href="#stroked-dashboard-dial"/></svg>')
                 ->data('visible', true);
-            // $menu->dashboard->divide();
 
             /*
-             * USERS
-             */
-            // if( Gate::check('view_users') )
-            // {
-                $menu->add('Utilizatori', '#sub-menu-utilizatori')
-                    ->prepend('<svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>')
-                    ->append('<i class="fa fa-chevron-right pull-right"></i> ')
+            |--------------------------------------------------------------------------
+            | CONTENT
+            |--------------------------------------------------------------------------
+            */
+            $menu->add('Continut', '#sub-menu-continut')
+                ->prepend('<svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg>')
+                ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
+                ->active('admin/content/*')
+                ->data('visible', true);
+                // DISPLAY ALL PAGES
+                $menu->add('Pagini', ['route' => 'users', 'parent' => $menu->continut->id])
+                    ->active('admin/content/pages/*')
                     ->data('visible', true);
-                    // POSTS
-                    $menu->add('Lista', ['route' => 'users', 'parent' => $menu->utilizatori->id])
-                        ->active('admin/users/*')
-                        ->data('visible', true);
-                    // // ROLES
-                    // $menu->add('Roluri', ['route' => 'users', 'parent' => $menu->utilizatori->id])
-                    //     ->active('admin/users/*')
-                    //     ->data('visible', true);
-            // }
 
+            /*
+            |--------------------------------------------------------------------------
+            | USERS
+            |--------------------------------------------------------------------------
+            */
+            $menu->add('Utilizatori', ['route' => 'users'])
+                ->prepend('<svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>')
+                ->active('admin/users/*')
+                ->data('visible', true);
+
+            /*
+            |--------------------------------------------------------------------------
+            | SETTINGS
+            |--------------------------------------------------------------------------
+            */
+            $menu->add('Setari', '#sub-menu-setari')
+                ->prepend('<svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>')
+                ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
+                ->data('visible', true);
+                // ABILITIES
+                $menu->add('Abilitati', ['route' => 'users', 'parent' => $menu->setari->id])
+                     ->active('admin/settings/abilities/*')
+                     ->data('visible', true);
         });
 
         return $next($request);

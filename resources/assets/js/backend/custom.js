@@ -1,29 +1,58 @@
 ////////////////////////////
-// Menu utilizatori collapse
+// Menu continut collapse
 ////////////////////////////
 $(document).ready(function() {
 
-	var utilizatori = $.cookie('utilizatori');
-	var utilizatori_icon = $(this).find('#utilizatoriCollapse i:first');
+	var continut = $.cookie('continut');
+	var continut_icon = $(this).find('#continutCollapse i:first');
 
-	$('ul.nav li.parent a#utilizatoriCollapse').click(function() {
+	$('ul.nav li.parent a#continutCollapse').click(function() {
 
 		// $(this).find('em:first').toggleClass("fa-chevron-down");
-		utilizatori_icon.toggleClass("fa-chevron-down");
+		continut_icon.toggleClass("fa-chevron-down");
 
-		if(utilizatori != null) {
-			$.removeCookie('utilizatori', { path: '/' });
+		if(continut != null) {
+			$.removeCookie('continut', { path: '/' });
 		} else {
-			$.cookie('utilizatori', 'collapsed', { expires: 7, path: '/' });
+			$.cookie('continut', 'collapsed', { expires: 7, path: '/' });
 		}
 	});
 
-	utilizatori_icon.addClass("fa-chevron-right");
+	continut_icon.addClass("fa-chevron-right");
 	
-	if(utilizatori != null) {
-		utilizatori_icon.addClass("fa-chevron-right");
+	if(continut != null) {
+		continut_icon.addClass("fa-chevron-right");
 	} else {
-		utilizatori_icon.addClass("fa-chevron-down");
+		continut_icon.addClass("fa-chevron-down");
+	}
+});
+
+////////////////////////////
+// Menu setari collapse
+////////////////////////////
+$(document).ready(function() {
+
+	var setari = $.cookie('setari');
+	var setari_icon = $(this).find('#setariCollapse i:first');
+
+	$('ul.nav li.parent a#setariCollapse').click(function() {
+
+		// $(this).find('em:first').toggleClass("fa-chevron-down");
+		setari_icon.toggleClass("fa-chevron-down");
+
+		if(setari != null) {
+			$.removeCookie('setari', { path: '/' });
+		} else {
+			$.cookie('setari', 'collapsed', { expires: 7, path: '/' });
+		}
+	});
+
+	setari_icon.addClass("fa-chevron-right");
+	
+	if(setari != null) {
+		setari_icon.addClass("fa-chevron-right");
+	} else {
+		setari_icon.addClass("fa-chevron-down");
 	}
 });
 

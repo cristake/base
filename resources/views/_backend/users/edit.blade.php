@@ -1,7 +1,7 @@
 @extends('_backend._layouts.master')
 
 @section('meta')
-    <title>Adaugare utilizator nou</title>
+    <title>Editare utilizator {!! $user->name !!}</title>
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -16,7 +16,7 @@
 	<div class="row">
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
-				Adaugare utilizator nou
+				Editare utilizator "{!! $user->name !!}"
 				{!! HTML::decode( link_to_route('users', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
 	        </h2>
 	    </div>
@@ -29,7 +29,7 @@
 				<div class="panel-body">
 
 					<!-- Form Display -->
-					{!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!}
+					{!! Form::model($user, ['route' => ['users_update', $user->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
 						@include('_backend.users.includes.user-form')
 					{!! Form::close() !!}
 

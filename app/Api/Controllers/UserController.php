@@ -44,13 +44,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        // if ( ! $this->auth->user() ) {
-        //     $hidden = $user->getHidden();
-
-        //     $user->setHidden(array_merge($hidden, ['email']));
-        // }
-        // return $user;
-
         return $this->response->item($user, new UserTransformer);
     }
 
@@ -63,7 +56,34 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User;
+
         $user->create($request->all());
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update($request->all());
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->destroy($id);
     }
 
     /**

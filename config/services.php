@@ -42,6 +42,7 @@ return [
         'redirect'      => 'http://base.dev/admin/login/callback/facebook',
     ],
 
+    // Socialite
     'twitter' => [
         'client_id'     => 'nFTXFzU8yKNPBfdB8xSLJwMIc',
         'client_secret' => 'pa4V6eNWvMQctniUtG3vb7lR3rtcy1EmX8HNO53nink0VVELce',

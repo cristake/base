@@ -8,7 +8,7 @@
 	get('users/{id}', 'UserController@show')->name('users_show');
 
 	get('users/{id}/edit', 'UserController@edit')->name('users_edit');
-	post('users/{id}/update', 'UserController@update')->name('users_update');
+	put('users/{id}/update', 'UserController@update')->name('users_update');
 
 	get('users/{id}/destroy', 'UserController@destroy')->name('users_destroy');
 
