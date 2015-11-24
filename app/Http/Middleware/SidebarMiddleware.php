@@ -36,7 +36,7 @@ class SidebarMiddleware
                 ->prepend('<svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg>')
                 ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
                 ->active('admin/content/*')
-                ->data('visible', true);
+                ->data('visible', false);
                 // DISPLAY ALL PAGES
                 $menu->add('Pagini', ['route' => 'users', 'parent' => $menu->continut->id])
                     ->active('admin/content/pages/*')
@@ -60,7 +60,7 @@ class SidebarMiddleware
             $menu->add('Setari', '#sub-menu-setari')
                 ->prepend('<svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>')
                 ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
-                ->data('visible', true);
+                ->data('visible', false);
                 // ABILITIES
                 $menu->add('Abilitati', ['route' => 'users', 'parent' => $menu->setari->id])
                      ->active('admin/settings/abilities/*')

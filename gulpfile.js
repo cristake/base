@@ -25,23 +25,35 @@ elixir(function(mix) {
 		.copy('node_modules/jquery.cookie/jquery.cookie.js', 'resources/assets/js/vendor/jquery.cookie.js')
 
 		// Copy Sweetalert Files
-		.copy('node_modules/sweetalert/sweetalert.css', 'resources/assets/css/vendor/sweetalert.css')
-		.copy('node_modules/sweetalert/sweetalert.min.js', 'resources/assets/js/vendor/sweetalert.min.js')
+		.copy('node_modules/sweetalert/dist/sweetalert.css', 'resources/assets/css/vendor/sweetalert.css')
+		.copy('node_modules/sweetalert/dist/sweetalert.min.js', 'resources/assets/js/vendor/sweetalert.min.js')
 
 
-		// Process back-end stylesheets
+		// Process backend stylesheets
 		.sass([
 			'backend/main.scss',
 		], 'resources/assets/css/backend/main.css')
+
+		// Process frontend stylesheets
+		.sass([
+			'frontend/main.scss',
+		], 'resources/assets/css/frontend/main.css')
 
 		// Combine pre-processed back-end CSS files
 		.styles([
 			'vendor/bootstrap-table.min.css',
 			'vendor/sweetalert.css',
 			'backend/main.css',
+			'vendor/ie10-viewport-bug-workaround.css',
 		], 'public/css/backend.css')
 
-		// Combine back-end scripts
+		// Combine pre-processed back-end CSS files
+		.styles([
+			'frontend/main.css',
+			'vendor/ie10-viewport-bug-workaround.css',
+		], 'public/css/frontend.css')
+
+		// Combine backend scripts
 		.scripts([
 			'vendor/jquery.js',
 			'vendor/bootstrap.js',
@@ -53,9 +65,17 @@ elixir(function(mix) {
 			'backend/custom.js'
 		], 'public/js/backend.js')
 
+		// Combine frontend scripts
+		.scripts([
+			'vendor/jquery.js',
+			'vendor/bootstrap.js',
+		], 'public/js/frontend.js')
+
 		// Apply version control
 		.version([
 			"public/css/backend.css", 
 			"public/js/backend.js", 
+			"public/css/frontend.css", 
+			"public/js/frontend.js", 
 		]);
 });

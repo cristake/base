@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\Page;
 use JWTAuth;
 
 class HomeController extends Controller
@@ -16,9 +17,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = $this->api->get('api/users');
+        $pages = Page::all();
 
-        return view('_frontend.home.index', compact('users'));
+        return view('_frontend.home.index', compact('pages'));
     }
 
     /**

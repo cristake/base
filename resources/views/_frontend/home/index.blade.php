@@ -1,55 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Laravel</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        <link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+        <!-- Custom title & meta for each page -->
+        @yield('meta')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+        <!-- Custom styles for this template -->
+        @yield('before-styles-end')
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+        {!! HTML::style(elixir('css/frontend.css')) !!}
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+        @yield('after-styles-end')
 
-            .title {
-                font-size: 96px;
-                margin-bottom: 40px;
-            }
+        {{-- <link href='//fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'> --}}
 
-            .quote {
-                font-size: 24px;
-            }
-        </style>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
+
     <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-                <div class="quote">{{ Inspiring::quote() }}</div>
-                @foreach($users as $user)
-                    <p>User name: {!! $user->name !!}</p>
-                @endforeach
+
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Project name</a>
+                </div>
+
+
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @foreach($pages as $page)
+                            @if($page->parent_id == 0)
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! $page->name !!} <span class="caret"></span></a>
+                                    @include('_frontend.home.submenus', ['id' => $page->id])
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../navbar/">Default</a></li>
+                        <li><a href="../navbar-static-top/">Static top</a></li>
+                        <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
-        </div>
+        </nav>
+
+        <div class="container">
+
+            <!-- Main component for a primary marketing message or call to action -->
+            <div class="jumbotron">
+                <h1>Navbar example</h1>
+                <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+                <p>To see the difference between static and fixed top navbars, just scroll.</p>
+                <p><a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a></p>
+            </div>
+
+        </div> <!-- /container -->
+
+
+        <!-- Scripts -->
+        @yield('before-scripts-end')
+        {!! HTML::script(elixir('js/frontend.js')) !!}
+        @yield('after-scripts-end')
+        @include('sweet::alert')
     </body>
 </html>

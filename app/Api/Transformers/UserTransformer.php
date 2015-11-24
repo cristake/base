@@ -13,20 +13,20 @@ class UserTransformer extends TransformerAbstract
      *
      * @var array
      */
-    protected $defaultIncludes = [
-        'roles',
-        'abilities',
-    ];
+    // protected $defaultIncludes = [
+    //     'roles',
+    //     'abilities',
+    // ];
 
     /**
      * List of resources possible to include
      *
      * @var array
      */
-    // protected $availableIncludes = [
-    //     'roles',
-    //     'abilities',
-    // ];
+    protected $availableIncludes = [
+        'roles',
+        'abilities',
+    ];
 
     /**
      * Turn this item object into a generic array
