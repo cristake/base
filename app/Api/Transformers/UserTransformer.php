@@ -3,11 +3,20 @@
 namespace Api\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use League\Fractal\ParamBag;
 use App\Models\User;
 use Api\Transformers\RoleTransformer;
 
 class UserTransformer extends TransformerAbstract
 {
+    /**
+     * List of params to use for filtering
+     *
+     * @var array
+     */
+    private $validParams = ['limit', 'order'];
+
+
     /**
      * List of resources to automatically include
      *
@@ -16,6 +25,7 @@ class UserTransformer extends TransformerAbstract
     // protected $defaultIncludes = [
     //     'roles',
     //     'abilities',
+    //     'pages',
     // ];
 
     /**
@@ -26,6 +36,7 @@ class UserTransformer extends TransformerAbstract
     protected $availableIncludes = [
         'roles',
         'abilities',
+        'pages',
     ];
 
     /**
@@ -50,7 +61,7 @@ class UserTransformer extends TransformerAbstract
     }
 
     /**
-     * Include Author
+     * Include Role
      *
      * @return League\Fractal\ItemResource
      */
@@ -62,7 +73,7 @@ class UserTransformer extends TransformerAbstract
     }
 
     /**
-     * Include Author
+     * Include Ability
      *
      * @return League\Fractal\ItemResource
      */
@@ -71,6 +82,32 @@ class UserTransformer extends TransformerAbstract
         $abilities = $user->abilities;
 
         return $this->collection($abilities, new AbilityTransformer);
+    }
+
+    /**
+     * Include Page
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includePages(User $user, ParamBag $params)
+    {
+        // Optional params validation
+        $usedParams = array_keys(iterator_to_array($params));
+        if ($invalidParams = array_diff($usedParams, $this->validParams)) {
+            throw new \Exception(sprintf('Invalid param(s): "%s". Valid param(s): "%s"', implode(',', $usedParams), implode(',', $this->validParams)));
+        }
+
+        // Processing
+        list($limit, $offset) = $params->get('limit');
+        list($orderCol, $orderBy) = $params->get('order');
+
+        $pages = $user->pages()
+            ->take($limit)
+            ->skip($offset)
+            ->orderBy($orderCol, $orderBy)
+            ->get();
+
+        return $this->collection($pages, new PageTransformer);
     }
 
 }

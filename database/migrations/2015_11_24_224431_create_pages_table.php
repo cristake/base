@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('slug', 30);
             $table->integer('parent_id');
             $table->integer('user_id');
+            $table->smallInteger('status')->default(1);
             $table->timestamps();
         });
     }

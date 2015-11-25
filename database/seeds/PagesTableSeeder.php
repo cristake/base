@@ -8,7 +8,9 @@ class PagesTableSeeder extends Seeder
 	public $pages = [
 		['id' => '1','name' => 'Home','slug' => 'home','parent_id' => 0,'user_id' => 1],
 		['id' => '2','name' => 'Why Us','slug' => 'why-us','parent_id' => 0,'user_id' => 1],
-		['id' => '3','name' => 'About Us','slug' => 'about-us','parent_id' => 2,'user_id' => 1],
+        ['id' => '3','name' => 'About Us','slug' => 'about-us','parent_id' => 2,'user_id' => 1],
+        ['id' => '4','name' => 'Certificates','slug' => 'certificates','parent_id' => 2,'user_id' => 1],
+		['id' => '5','name' => 'Awards','slug' => 'awards','parent_id' => 2,'user_id' => 1],
 	];
 
     /**

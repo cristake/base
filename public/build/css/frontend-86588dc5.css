@@ -5757,6 +5757,9 @@ body {
   min-height: 2000px;
   padding-top: 70px; }
 
+.dropdown:hover .dropdown-menu {
+  display: block; }
+
 /*# sourceMappingURL=main.css.map */
 
 /*!

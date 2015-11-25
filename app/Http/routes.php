@@ -14,6 +14,7 @@ $router->group(['namespace' => 'Backend'], function () use ($router)
 		$router->group(['middleware' => ['auth', 'menu']], function () use ($router)
 		{
 			require(__DIR__ . "/Routes/Backend/Dashboard.php");
+			require(__DIR__ . "/Routes/Backend/Page.php");
 			require(__DIR__ . "/Routes/Backend/User.php");
 		});
 	});

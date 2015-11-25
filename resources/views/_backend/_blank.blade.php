@@ -12,7 +12,17 @@
 @section('after-styles-end') @stop
 
 @section('content')
-    
+	<!-- Start page header -->  
+	<div class="row">
+	    <div class="col-lg-12">
+	        <h2 class="page-header" id="simple-msg">
+				{!! ucfirst( last( Request::segments() ) ) !!}
+				<small class="pull-right">Administrare utilizatori</small>
+	        </h2>
+	    </div>
+	</div>
+	<!-- End page header -->
+
 @stop
 
 @section('before-scripts-end') @stop

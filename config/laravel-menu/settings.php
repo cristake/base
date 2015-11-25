@@ -3,7 +3,7 @@
 return array(
 	'default' => array(
 		'auto_activate'    => true,
-		'activate_parents' => true,
+		'activate_parents' => false,
 		'active_class'     => 'active',
 		'restful'          => false,
 		'cascade_data'     => true,

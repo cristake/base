@@ -35,10 +35,10 @@ class SidebarMiddleware
             $menu->add('Continut', '#sub-menu-continut')
                 ->prepend('<svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg>')
                 ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
-                ->active('admin/content/*')
-                ->data('visible', false);
+                // ->active('admin/content/*')
+                ->data('visible', true);
                 // DISPLAY ALL PAGES
-                $menu->add('Pagini', ['route' => 'users', 'parent' => $menu->continut->id])
+                $menu->add('Pagini', ['route' => 'pages', 'parent' => $menu->continut->id])
                     ->active('admin/content/pages/*')
                     ->data('visible', true);
 

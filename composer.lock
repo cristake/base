@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7b975959bd19128ee305c4ddebaa545d",
+    "hash": "2d6bb8640548836b0442d4222ab8dadb",
     "content-hash": "51ba27eac0d7158ab980b760831a0be6",
     "packages": [
         {
@@ -2802,16 +2802,16 @@
         },
         {
             "name": "tymon/jwt-auth",
-            "version": "0.5.5",
+            "version": "0.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "eb4abc9bf9d301e3e22f4eaa45a509d6b3100d58"
+                "reference": "f70842d94a548f1457114dd57b6c0b9bf94ba13c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/eb4abc9bf9d301e3e22f4eaa45a509d6b3100d58",
-                "reference": "eb4abc9bf9d301e3e22f4eaa45a509d6b3100d58",
+                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/f70842d94a548f1457114dd57b6c0b9bf94ba13c",
+                "reference": "f70842d94a548f1457114dd57b6c0b9bf94ba13c",
                 "shasum": ""
             },
             "require": {
@@ -2861,7 +2861,7 @@
                 "laravel",
                 "tymon"
             ],
-            "time": "2015-09-15 21:20:29"
+            "time": "2015-11-24 20:02:19"
         },
         {
             "name": "uxweb/sweet-alert",

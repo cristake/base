@@ -59,4 +59,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->belongsToMany(Ability::class, 'user_abilities', 'user_id', 'ability_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pages() {
+        return $this->hasMany(Page::class);
+    }
+
 }

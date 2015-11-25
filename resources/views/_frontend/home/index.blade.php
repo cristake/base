@@ -30,7 +30,7 @@
     <body>
 
         <!-- Fixed navbar -->
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,14 +42,12 @@
                     <a class="navbar-brand" href="#">Project name</a>
                 </div>
 
-
-
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         @foreach($pages as $page)
                             @if($page->parent_id == 0)
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! $page->name !!} <span class="caret"></span></a>
+                                <li class="{!! $page->hasChildren() ? 'dropdown' : '' !!}">
+                                    <a href="{{ $page->hasChildren() ? url($page->slug .'/'. $page->firstChild()->slug) : url($page->slug) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! $page->name !!} {!! $page->hasChildren() ? '<span class="caret"></span>' : '' !!}</a>
                                     @include('_frontend.home.submenus', ['id' => $page->id])
                                 </li>
                             @endif
