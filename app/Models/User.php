@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -12,7 +13,14 @@ use Hash;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
-    use Authenticatable, CanResetPassword, HasRolesAndAbilities;
+    use Authenticatable, CanResetPassword, HasRolesAndAbilities, SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     /**
      * The database table used by the model.
@@ -34,6 +42,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * Determine if a user is admin
+     *
+     * @param $password
+     */
+    public function isAdmin()
+    {
+        return $this->is('admin');
+    }
+
+    /**
+     * Determine if a user is admin
+     *
+     * @param $password
+     */
+    public function isManager()
+    {
+        return $this->is('manager');
+    }
+
+    /**
+     * Determine if a user is admin
+     *
+     * @param $password
+     */
+    public function isAdminOrManager()
+    {
+        return $this->is('manager') or $this->is('admin');
+    }
 
     /**
      * Passwords must always be hashed.

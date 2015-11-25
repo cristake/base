@@ -66,7 +66,10 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pages = $this->api->get('api/pages');
+        $page = $this->api->get('api/pages/' . $id);
+
+        return view('_backend.pages.edit', compact('pages', 'page'));
     }
 
     /**
@@ -78,7 +81,10 @@ class PageController extends Controller
      */
     public function update(UpdatePageRequest $request, $id)
     {
-        //
+        $this->api->put('api/pages/'. $id, $request->all());
+
+        alert()->success(sprintf("Pagina %s a fost editata!", $request->get('name')), 'Succes!');
+        return redirect()->route('pages');
     }
 
     /**
@@ -89,6 +95,43 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $page = $this->api->get('api/pages/' . $id);
+
+        $this->api->delete('api/pages/'. $id);
+
+        alert()->success( sprintf('Pagina %s a fost stearsa!', $page->name), 'Succes!' );
+        return redirect()->route('pages');
+    }
+
+    /**
+     * Restore the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $this->api->get( sprintf('api/pages/%d/restore', $id) );
+
+        alert()->success( 'Pagina a fost restaurata!', 'Success' );
+        return redirect()->route('pages');
+    }
+
+    /**
+     * Mark resource as active / inactive
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function mark($id, $status)
+    {
+        $page = $this->api->get( sprintf('api/pages/%d/status/%d', $id, $status));
+
+        $this->api->get(sprintf('api/pages/%d/mark/%d', $id, $status));
+
+        $message = ( sprintf("Pagina %s a fost %s", $page->name, ($page->status == 1 ? "activata!" : "dezactivata!")) );
+        alert()->success($message, 'Succes!');
+
+        return redirect()->back();
     }
 }

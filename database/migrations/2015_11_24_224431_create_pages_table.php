@@ -20,6 +20,7 @@ class CreatePagesTable extends Migration
             $table->integer('user_id');
             $table->smallInteger('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

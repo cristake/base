@@ -11,6 +11,7 @@
 	data-sort-name="id"
 	data-sort-order="asc"
 	data-flat="true"
+	data-row-style="rowStyle"
 	class="table table-hover">
     <thead>
 	    <tr>

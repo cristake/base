@@ -21,9 +21,10 @@ class CreateUsersTable extends Migration
             $table->smallInteger('status')->default(1);
             $table->string('avatar');
             $table->string('provider');
-            $table->string('provider_id')->unique();
+            $table->string('provider_id')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -25,7 +25,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        // if(\Auth::user()->isAdminOrManager())
+            $users = User::withTrashed()->get();
+        // else
+            // $users = User::all();
 
         $meta = [
             'total' => count($users)
@@ -55,9 +58,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-
-        $user->create($request->all());
+        User::firstOrNew($request->except(['_token', 'password_confirmation']))->save();
     }
 
     /**
@@ -69,9 +70,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-
-        $user->update($request->all());
+        User::findOrFail($id)->update($request->all());
     }
 
     /**
@@ -84,10 +83,23 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->destroy($id);
+        $user->status = 0;
+        $user->update();
     }
 
     /**
-     * Mark user as inactive
+     * Restore the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        User::withTrashed()->findOrFail($id)->restore();
+    }
+
+    /**
+     * Mark resource as inactive
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

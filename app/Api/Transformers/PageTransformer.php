@@ -45,10 +45,11 @@ class PageTransformer extends TransformerAbstract
             'name'          => $page->name,
             'slug'          => $page->hasParent() ? $page->getParent()->slug . '/' . $page->slug : $page->slug,
             'parent'        => $page->hasParent() ? $page->getParent()->name : '-',
-            'created_by'    => $page->user,
+            'created_by'    => $page->user->name,
             'active'        => (boolean) $page->status,
             'created_at'	=> $page->created_at->format('d-m-Y H:i:s'),
-            'updated_at'	=> $page->updated_at->format('d-m-Y H:i:s'),
+            'updated_at'    => $page->updated_at->format('d-m-Y H:i:s'),
+            'deleted_at'	=> $page->deleted_at ? $page->deleted_at->format('d-m-Y H:i:s') : null,
         ];
     }
 

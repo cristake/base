@@ -16,9 +16,11 @@ $api->version('v1', function ($api)
 
 		$api->resource('pages', 'PageController');
 		$api->get('pages/{id}/mark/{status}', 'PageController@mark');
+		$api->get('pages/{id}/restore', 'PageController@restore');
 
 		$api->resource('users', 'UserController');
 		$api->get('users/{id}/mark/{status}', 'UserController@mark');
+		$api->get('users/{id}/restore', 'UserController@restore');
 
 		$api->resource('roles', 'RoleController');
 		$api->resource('abilities', 'AbilityController');

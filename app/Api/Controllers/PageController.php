@@ -25,7 +25,10 @@ class PageController extends Controller
      */
     public function index()
     {
-        $pages = Page::all();
+        if(\Auth::user()->isAdminOrManager())
+            $pages = Page::withTrashed()->get();
+        else
+            $pages = Page::all();
 
         $meta = [
             'total' => count($pages)
@@ -55,9 +58,7 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        $page = new Page;
-
-        $page->create($request->all());
+        Page::firstOrNew($request->except('_token'))->save();
     }
 
     /**
@@ -69,9 +70,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $page = Page::findOrFail($id);
-
-        $page->update($request->all());
+        Page::findOrFail($id)->update($request->all());
     }
 
     /**
@@ -80,19 +79,32 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         $page = Page::findOrFail($id);
         $page->destroy($id);
+        $page->status = 0;
+        $page->update();
     }
 
     /**
-     * Mark user as inactive
+     * Restore the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mark(Request $request, $id, $status)
+    public function restore($id)
+    {
+        Page::withTrashed()->findOrFail($id)->restore();
+    }
+
+    /**
+     * Mark resource as inactive
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function mark($id, $status)
     {
         $page = Page::findOrFail($id);
         $page->status = $status;

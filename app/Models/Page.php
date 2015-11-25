@@ -3,10 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 
 class Page extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -50,6 +60,18 @@ class Page extends Model
      */
 	public function user() {
 		return $this->belongsTo(User::class);
+	}
+
+	/**
+	 * Seeting the default user when creating a page
+     */
+	public function save(array $options = array())
+	{
+	    if( ! $this->user_id)
+	    {
+	        $this->user_id = Auth::id();
+	    }
+	    parent::save($options);
 	}
 
 	/**

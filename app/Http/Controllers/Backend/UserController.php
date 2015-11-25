@@ -68,7 +68,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->api->get('api/users/' . $id);
 
         return view('_backend.users.edit', compact('user'));
     }
@@ -96,7 +96,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->api->get('api/users/' . $id);
 
         $this->api->delete('api/users/'. $id);
 
@@ -105,7 +105,21 @@ class UserController extends Controller
     }
 
     /**
-     * Mark user as inactive
+     * Restore the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $this->api->get( sprintf('api/users/%d/restore', $id) );
+
+        alert()->success( 'Utilizatorul a fost restaurat!', 'Success' );
+        return redirect()->route('users');
+    }
+
+    /**
+     * Mark resource as active / inactive
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -114,7 +128,7 @@ class UserController extends Controller
     {
         $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
 
-        $user = User::findOrFail($id);
+        $user = $this->api->get('api/users/' . $id);
 
         $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($user->status == 1 ? "activat!" : "dezactivat!")) );
         alert()->success($message, 'Succes!');

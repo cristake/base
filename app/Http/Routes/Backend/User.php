@@ -11,5 +11,6 @@
 	put('users/{id}/update', 'UserController@update')->name('users_update');
 
 	get('users/{id}/destroy', 'UserController@destroy')->name('users_destroy');
+	get('users/{id}/restore', 'UserController@restore')->name('users_restore');
 
 	get('users/{id}/mark/{status}', 'UserController@mark')->name('mark_users');

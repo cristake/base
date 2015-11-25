@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder
 {
     protected $tables = [
         'users',
-        'pages',
+        // 'pages',
     ];
 
     /**
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     protected $seeders = [
         'UserTableSeeder',
-        'PagesTableSeeder',
+        // 'PagesTableSeeder',
     ];
 
     /**

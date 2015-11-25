@@ -2,7 +2,7 @@
 <div class="form-group {{ $errors->first('name', 'has-error') }}">
 	{!! Form::label('name', 'Nume', ['class' => 'control-label col-sm-2']) !!}
 	<div class="col-sm-6">
-		{!! Form::text('name', null,  ['class' => 'form-control', 'placeholder' => 'Nume']) !!}
+		{!! Form::text('name', null,  ['class' => 'form-control', 'placeholder' => 'Nume', 'autofocus']) !!}
 	</div>
 	<div class="col-sm-4">
 		<small>

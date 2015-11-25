@@ -42,6 +42,15 @@
 @section('before-scripts-end') @stop
 @section('after-scripts-end')
 	<script>
+	    function rowStyle(row, index) {
+	        if ( row.deleted_at ) {
+	            return {
+	                classes: 'strikethrough warning'
+	            };
+	        }
+	        return {};
+	    }
+
 		function StatusFormatter(index, row)
 		{
 			var mark_url = "{!! route('mark_pages', [':id', ':status']) !!}";
@@ -49,10 +58,14 @@
 			mark_url = mark_url.replace(':status', row.active == true ? 0 : 1);
 
 			var active = '<a href="'+mark_url+'" class="btn btn-sm btn-warning" title="Dezactiveaza pagina"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza pagina"></i>&nbsp;Activa</a> ';
+
 			var inactive = '<a href="'+mark_url+'" class="btn btn-sm btn-success" title="Activeaza pagina"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza pagina"></i>&nbsp;Inactiva</a> ';
 
 			if( row.active )
 				return [active].join('');
+
+			if( row.deleted_at )
+				return '';
 
 			return [inactive].join('');
 		}
@@ -65,11 +78,19 @@
 			var destroy_url = "{!! route('pages_destroy', ':id') !!}";
 			destroy_url = destroy_url.replace(':id', row.id);
 
+			var restore_url = "{!! route('pages_restore', ':id') !!}";
+			restore_url = restore_url.replace(':id', row.id);
+
 			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-primary" title="Editeaza pagina"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza pagina"></i></a> ';
 
 			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-sm btn-danger" title="Sterge pagina"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge pagina"></i></a> ';
 
-			return [edit, destroy].join('');
+			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza pagina"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza pagina"></i></a> ';
+
+			if( row.deleted_at )
+				return [restore].join('');
+			else
+				return [edit, destroy].join('');
 		}
 	</script>
 @stop

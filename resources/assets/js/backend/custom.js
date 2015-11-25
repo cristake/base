@@ -56,6 +56,43 @@ $(document).ready(function() {
 	}
 });
 
+
+////////////////////////////
+// Data confirm SweetAlert
+//////////////////////////// 
+$(function() {
+	// Confirm deleting resources
+	$("a[data-confirm]").click(function(e) {
+		e.preventDefault();
+		var link = this;
+		swal({
+            title: "Esti sigur?",
+            text: "Inregistrarile sterse nu vor putea fi recuperate!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            confirmButtonText: 'Da, sunt sigur!',
+            cancelButtonText: "Nu, anuleaza!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+        function(isConfirm) {
+  			if (isConfirm) {
+				// swal({
+				// 	title: "Success!",
+				// 	text: "Inregistrarea a fost stearsa!",
+				// 	type: "success",
+				// });
+  				window.location = link.href;
+  			}
+			else {
+				swal("Anulat", "Inregistrarea nu a fost stearsa!", "error");
+			}
+        });
+	});
+});
+
+
 ////////////////////////////
 // Tooltip
 ////////////////////////////

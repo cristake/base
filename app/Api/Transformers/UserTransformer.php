@@ -53,6 +53,7 @@ class UserTransformer extends TransformerAbstract
             'active'        => (boolean) $user->status,
             'created_at'	=> $user->created_at->format('d-m-Y H:i:s'),
             'updated_at'	=> $user->updated_at->format('d-m-Y H:i:s'),
+            'deleted_at'    => $user->deleted_at ? $user->deleted_at->format('d-m-Y H:i:s') : null,
             'links'         => [
                 'rel'   => 'self',
                 'uri'   => route('api.users.show', $user->id)
