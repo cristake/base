@@ -1,7 +1,7 @@
 @extends('_backend._layouts.master')
 
 @section('meta')
-    <title>Pagini</title>
+    <title>Sectiuni</title>
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -17,7 +17,7 @@
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
 				{!! ucfirst( last( Request::segments() ) ) !!}
-				<small class="pull-right">Administrare pagini</small>
+				<small class="pull-right">Administrare sectiuni pentru pagina "{{ $page->name }}"</small>
 	        </h2>
 	    </div>
 	</div>
@@ -28,10 +28,10 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					{{-- @can('create_pages') --}}
-						{!! HTML::decode( link_to_route('pages_create', '<i class="fa fa-plus"></i> Adauga o pagina noua', [], ['class' => 'btn btn-primary', 'title' => 'Adauga o pagina noua', 'id' => 'toolbar']) ) !!}
+						{!! HTML::decode( link_to_route('sections_create', '<i class="fa fa-plus"></i> Adauga o sectiune noua', $page->id, ['class' => 'btn btn-primary', 'title' => 'Adauga o sectiune noua', 'id' => 'toolbar']) ) !!}
 					{{-- @endcan --}}
 
-					@include('_backend.pages.includes.pages-table')
+					@include('_backend.sections.includes.sections-table')
 
 				</div>
 			</div>

@@ -18,9 +18,9 @@ class CreatePagesTable extends Migration
             $table->string('slug', 30);
             $table->integer('parent_id');
             $table->smallInteger('status')->default(1);
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
-            $table->integer('deleted_by')->unsigned();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

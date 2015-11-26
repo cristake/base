@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Auth;
 
 class Section extends Model
 {
@@ -80,6 +81,12 @@ class Section extends Model
 	    parent::delete();
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function user() {
+		return $this->belongsTo(User::class, 'created_by');
+	}
 
     /**
      * Scope a query to only include active pages.

@@ -1,19 +1,20 @@
-## Jot-Bot - Token-Based Authentication for AngularJS and Laravel Tutorial
-
-This is the code for the AngularJS and Laravel token-based authentication tutorial on [Scotch.io](https://scotch.io/) and [RyanChenkie.com](http://ryanchenkie.com/)
-
-### Installation
-
-Clone the repository and install the Laravel vendor files
-
-	composer install
-
-Once your .env file is setup with your database connection parameters, run the migrations and seed the database
-
-	php artisan migrate
-	php artisan db:seed
+## Starter BaseApp for Laravel 5.1
+A basic starter app for Laravel 5.1, using:
+- dingo/api
+- tymon/jwt-auth
+- lavary/laravel-menu
+- silber/bouncer
+- laravel/socialite
 
 
-### Branches
+### Base To-Do's
+1. Translations for models (Page)
+2. Sections for pages
+3. Roles
+4. Abilities
+5. Settings
+6. System
 
-The Scotch branch has all the code that is covered in the first part of the tutorial on [Scotch.io](https://scotch.io/tutorials/token-based-authentication-for-angularjs-and-laravel-apps). The master branch is the complete code that includes extra material covered in the second part of the tutorial at [RyanChenkie.com](http://ryanchenkie.com/token-based-authentication-for-angularjs-and-laravel-apps).
+### Future dev - Online Store
+1. Categories
+2. Products

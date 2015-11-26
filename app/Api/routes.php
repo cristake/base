@@ -19,6 +19,11 @@ $api->version('v1', function ($api)
 		$api->get('pages/{id}/restore', 'PageController@restore');
 		$api->get('pages/{id}/forceDelete', 'PageController@forceDelete');
 
+		$api->resource('sections', 'SectionController');
+		// $api->get('sections/{id}/mark/{status}', 'SectionController@mark');
+		// $api->get('sections/{id}/restore', 'SectionController@restore');
+		// $api->get('sections/{id}/forceDelete', 'SectionController@forceDelete');
+
 		$api->resource('users', 'UserController');
 		$api->get('users/{id}/mark/{status}', 'UserController@mark');
 		$api->get('users/{id}/restore', 'UserController@restore');

@@ -56,6 +56,13 @@ class Page extends Model
 	}
 
 	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+	public function sections() {
+		return $this->hasMany(Section::class);
+	}
+
+	/**
 	 * Setting the authenticated user when creating a resource
      */
 	public function save(array $options = array())

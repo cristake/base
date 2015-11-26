@@ -58,9 +58,9 @@
 			mark_url = mark_url.replace(':id', row.id);
 			mark_url = mark_url.replace(':status', row.active == true ? 0 : 1);
 
-			var active = '<a href="'+mark_url+'" class="btn btn-sm btn-warning" title="Dezactiveaza utilizator"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza utilizator"></i>&nbsp;Activ</a> ';
+			var active = '<a href="'+mark_url+'" class="btn btn-warning" title="Dezactiveaza utilizator"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza utilizator"></i>&nbsp;Activ</a> ';
 
-			var inactive = '<a href="'+mark_url+'" class="btn btn-sm btn-success" title="Activeaza utilizator"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza utilizator"></i>&nbsp;Inactiv</a> ';
+			var inactive = '<a href="'+mark_url+'" class="btn btn-success" title="Activeaza utilizator"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza utilizator"></i>&nbsp;Inactiv</a> ';
 
 			if( row.active )
 				return [active].join('');
@@ -85,13 +85,13 @@
 			var forceDelete_url = "{!! route('users_forceDelete', ':id') !!}";
 			forceDelete_url = forceDelete_url.replace(':id', row.id);
 
-			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-info" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
+			var edit = '<a href="'+edit_url+'" class="btn btn-info" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
 
-			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-sm btn-danger" title="Sterge utilizatorul"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul"></i></a> ';
+			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-danger" title="Sterge utilizatorul"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul"></i></a> ';
 
-			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza utilizator"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza utilizator"></i></a> ';
+			var restore = '<a href="'+restore_url+'" class="btn btn-success" title="Restaureaza utilizator"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza utilizator"></i></a> ';
 
-			var forceDelete = '<a data-confirm="Esti sigur?" href="'+forceDelete_url+'" class="btn btn-sm btn-danger" title="Sterge utilizatorul definitiv"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul definitiv"></i></a> ';
+			var forceDelete = '<a data-confirm="Esti sigur?" href="'+forceDelete_url+'" class="btn btn-danger" title="Sterge utilizatorul definitiv"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul definitiv"></i></a> ';
 
 			if( row.deleted_at )
 				return [restore, forceDelete].join('');

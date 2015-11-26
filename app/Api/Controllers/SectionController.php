@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace Api\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Models\Section;
+use Api\Transformers\SectionTransformer;
 
 class SectionController extends Controller
 {
@@ -14,24 +18,18 @@ class SectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page_id)
+    public function index()
     {
-        $page = $this->api->get( sprintf('api/pages/%d', $page_id) );
+        if(\Auth::user()->isAdminOrManager())
+            $sections = Section::withTrashed()->get();
+        else
+            $sections = Section::all();
 
-        return view('_backend.sections.index', compact('page'));
-    }
+        $meta = [
+            'total' => count($sections)
+        ];
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($page_id)
-    {
-        $page = $this->api->get( sprintf('api/pages/%d', $page_id) );
-        $pages = $this->api->get('api/pages');
-
-        return view('_backend.sections.create', compact('pages', 'page'));
+        return $this->response->collection($sections, new SectionTransformer)->setMeta($meta);
     }
 
     /**
@@ -40,12 +38,9 @@ class SectionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $page_id)
+    public function store(Request $request)
     {
-        $this->api->post('api/sections', $request->all());
-
-        alert()->success(sprintf("Sectiunea %s a fost creata!", $request->get('title')), 'Succes!');
-        return redirect()->route('sections');
+        Section::firstOrNew($request->except('_token'))->save();
     }
 
     /**
@@ -56,18 +51,9 @@ class SectionController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $section = Section::withTrashed()->findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->response->item($section, new SectionTransformer);
     }
 
     /**

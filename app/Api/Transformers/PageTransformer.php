@@ -20,8 +20,9 @@ class PageTransformer extends TransformerAbstract
      *
      * @var array
      */
-    // protected $defaultIncludes = [
-    // ];
+    protected $defaultIncludes = [
+        'sections',
+    ];
 
 
     /**
@@ -60,11 +61,11 @@ class PageTransformer extends TransformerAbstract
      *
      * @return League\Fractal\ItemResource
      */
-    // public function includeRoles(Page $page)
-    // {
-    //     $roles = $page->roles;
+    public function includeSections(Page $page)
+    {
+        $sections = $page->sections;
 
-    //     return $this->collection($roles, new RoleTransformer);
-    // }
+        return $this->collection($sections, new SectionTransformer);
+    }
 
 }

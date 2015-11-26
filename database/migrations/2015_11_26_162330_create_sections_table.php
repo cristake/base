@@ -15,14 +15,14 @@ class CreateSectionsTable extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('page_id')->unsigned();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('title');
             $table->string('photo')->nullable();
             $table->string('content')->nullable();
             $table->smallInteger('status')->default(1);
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
-            $table->integer('deleted_by')->unsigned();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 

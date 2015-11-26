@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->string('provider');
             $table->string('provider_id')->unique()->nullable();
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
-            $table->integer('deleted_by')->unsigned();
+            $table->integer('created_by')->unsigned()->nullable();
+            $table->integer('updated_by')->unsigned()->nullable();
+            $table->integer('deleted_by')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
