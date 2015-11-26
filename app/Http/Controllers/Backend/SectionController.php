@@ -1,31 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use App\Models\Page;
-use JWTAuth;
 
-class HomeController extends Controller
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $pages = Page::active();
-
-        return view('_frontend.home.index', compact('pages'));
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -35,9 +32,10 @@ class HomeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return Response
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         //
     }
@@ -46,7 +44,7 @@ class HomeController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -57,7 +55,7 @@ class HomeController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -67,10 +65,11 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -79,7 +78,7 @@ class HomeController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

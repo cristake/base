@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Auth;
 
-class Page extends Model
+class Section extends Model
 {
     use SoftDeletes;
 
@@ -22,14 +21,14 @@ class Page extends Model
 	 *
 	 * @var string
 	 */
-	protected $table = 'pages';
+	protected $table = 'sections';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'parent_id', 'user_id', 'status'];
+    protected $fillable = ['code', 'title', 'photo', 'content', 'page_id', 'status'];
 
 	/**
 	 * The attributes that are not mass assignable.
@@ -38,21 +37,11 @@ class Page extends Model
 	 */
 	protected $guarded = ['id'];
 
-    /**
-     * Create the slug from the title
-     */
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst( strtolower($value) );
-
-        // grab the title and slugify it
-        $this->attributes['slug'] = str_slug($value);
-    }
-
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-	public function user() {
-		return $this->belongsTo(User::class, 'created_by');
+	public function page() {
+		return $this->belongsTo(Page::class);
 	}
 
 	/**
@@ -91,6 +80,7 @@ class Page extends Model
 	    parent::delete();
 	}
 
+
     /**
      * Scope a query to only include active pages.
      *
@@ -100,60 +90,5 @@ class Page extends Model
     {
         return $query->where('status', 1)->get();
     }
-
-	/**
-	 * Determine if a page has children
-	 * 
-	 * @return boolean
-	 *
-	 */
-	public function hasChildren()
-	{
-		return in_array( $this->id, $this->lists('parent_id')->all() );
-	}
-
-	/**
-	 * Get all children of a page
-	 * 
-	 * @return collection
-	 *
-	 */
-	public function getChildren()
-	{
-		return $this->whereParentId($this->id)->get();
-	}
-
-	/**
-	 * Get the first child of a page
-	 * 
-	 * @return item
-	 *
-	 */
-	public function firstChild()
-	{
-		return $this->whereParentId($this->id)->first();
-	}
-
-	/**
-	 * Determine if a page has children
-	 * 
-	 * @return boolean
-	 *
-	 */
-	public function hasParent()
-	{
-		return in_array( $this->parent_id, $this->lists('id')->all() );
-	}
-
-	/**
-	 * Get the parent of a child page
-	 * 
-	 * @return item
-	 *
-	 */
-	public function getParent()
-	{
-		return $this->whereId($this->parent_id)->first();
-	}
 
 }

@@ -12,5 +12,6 @@
 
 	get('content/pages/{id}/destroy', 'PageController@destroy')->name('pages_destroy');
 	get('content/pages/{id}/restore', 'PageController@restore')->name('pages_restore');
+	get('content/pages/{id}/forceDelete', 'PageController@forceDelete')->name('pages_forceDelete');
 
 	get('content/pages/{id}/mark/{status}', 'PageController@mark')->name('mark_pages');

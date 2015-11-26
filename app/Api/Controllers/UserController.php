@@ -45,7 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::withTrashed()->findOrFail($id);
 
         return $this->response->item($user, new UserTransformer);
     }
@@ -96,6 +96,18 @@ class UserController extends Controller
     public function restore($id)
     {
         User::withTrashed()->findOrFail($id)->restore();
+    }
+
+    /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($id)
+    {
+        $user = User::withTrashed()->findOrFail($id);
+        $user->forceDelete($id);
     }
 
     /**

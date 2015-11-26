@@ -16,7 +16,7 @@
 <div class="form-group {{ $errors->first('parent_id', 'has-error') }}">
 	{!! Form::label('parent_id', 'Pagina principala', ['class' => 'control-label col-sm-2']) !!}
 	<div class="col-sm-6">
-		{!! Form::select('parent_id', ['' => 'Selecteaza pagina'] + $pages->lists('name', 'id')->all(), null, ['class' => 'form-control']) !!}
+		{!! Form::select('parent_id', ['' => 'Selecteaza pagina'] + ( isset($page->id) ? $pages->except([$page->id])->lists('name', 'id')->all() : $pages->lists('name', 'id')->all() ), null, ['class' => 'form-control']) !!}
 	</div>
 	<div class="col-sm-4">
 		<small>

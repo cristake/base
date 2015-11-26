@@ -42,7 +42,8 @@
 @section('before-scripts-end') @stop
 @section('after-scripts-end')
 	<script>
-	    function rowStyle(row, index) {
+	    function rowStyle(row, index)
+	    {
 	        if ( row.deleted_at ) {
 	            return {
 	                classes: 'strikethrough warning'
@@ -81,14 +82,19 @@
 			var restore_url = "{!! route('users_restore', ':id') !!}";
 			restore_url = restore_url.replace(':id', row.id);
 
-			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-primary" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
+			var forceDelete_url = "{!! route('users_forceDelete', ':id') !!}";
+			forceDelete_url = forceDelete_url.replace(':id', row.id);
 
-			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-sm btn-danger" title="Sterge utilizator"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizator"></i></a> ';
+			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-info" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
 
-			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza pagina"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza pagina"></i></a> ';
+			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-sm btn-danger" title="Sterge utilizatorul"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul"></i></a> ';
+
+			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza utilizator"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza utilizator"></i></a> ';
+
+			var forceDelete = '<a data-confirm="Esti sigur?" href="'+forceDelete_url+'" class="btn btn-sm btn-danger" title="Sterge utilizatorul definitiv"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul definitiv"></i></a> ';
 
 			if( row.deleted_at )
-				return [restore].join('');
+				return [restore, forceDelete].join('');
 			else
 				return [edit, destroy].join('');
 		}

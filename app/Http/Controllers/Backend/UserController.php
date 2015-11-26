@@ -119,16 +119,32 @@ class UserController extends Controller
     }
 
     /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($id)
+    {
+        $user = $this->api->get('api/users/' . $id);
+
+        $this->api->get(sprintf('api/users/%d/forceDelete', $id));
+
+        alert()->success( sprintf('Utilizatorul %s a fost sters definitiv!', $user->name), 'Succes!' );
+        return redirect()->route('users');
+    }
+
+    /**
      * Mark resource as active / inactive
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mark(Request $request, $id, $status)
+    public function mark($id, $status)
     {
-        $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
-
         $user = $this->api->get('api/users/' . $id);
+
+        $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
 
         $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($user->status == 1 ? "activat!" : "dezactivat!")) );
         alert()->success($message, 'Succes!');

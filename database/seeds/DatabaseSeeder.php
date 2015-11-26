@@ -8,6 +8,8 @@ class DatabaseSeeder extends Seeder
     protected $tables = [
         'users',
         // 'pages',
+        'roles',
+        'user_roles',
     ];
 
     /**
@@ -16,6 +18,8 @@ class DatabaseSeeder extends Seeder
     protected $seeders = [
         'UserTableSeeder',
         // 'PagesTableSeeder',
+        'RolesTableSeeder',
+        'UserRolesTableSeeder',
     ];
 
     /**

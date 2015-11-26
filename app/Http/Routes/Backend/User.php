@@ -12,5 +12,6 @@
 
 	get('users/{id}/destroy', 'UserController@destroy')->name('users_destroy');
 	get('users/{id}/restore', 'UserController@restore')->name('users_restore');
+	get('users/{id}/forceDelete', 'UserController@forceDelete')->name('users_forceDelete');
 
 	get('users/{id}/mark/{status}', 'UserController@mark')->name('mark_users');

@@ -20,6 +20,8 @@
 	        <th data-field="parent" data-align="center" data-valign="middle" data-sortable="true">Pagina principala</th>
 	        <th data-field="active" data-align="center" data-valign="middle" data-sortable="true" data-formatter="StatusFormatter">Status</th>
 	        <th data-field="updated_at" data-align="center" data-valign="middle" data-sortable="true">Ultimul update</th>
+	        <th data-field="sections" data-align="center" data-valign="middle" data-sortable="false" data-formatter="SectionsFormatter">Sectiuni</th>
+	        {{-- <th data-field="seo" data-align="center" data-valign="middle" data-sortable="false" data-formatter="SeoFormatter">SEO</th> --}}
 	        <th data-field="actions" data-align="center" data-valign="middle" data-sortable="false" data-formatter="ActionsFormatter">Actiuni</th>
 	    </tr>
     </thead>

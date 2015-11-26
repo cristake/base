@@ -88,7 +88,7 @@ class PageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft delete the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -118,6 +118,22 @@ class PageController extends Controller
     }
 
     /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($id)
+    {
+        $page = $this->api->get('api/pages/' . $id);
+
+        $this->api->get(sprintf('api/pages/%d/forceDelete', $id));
+
+        alert()->success( sprintf('Pagina %s a fost stearsa definitiv!', $page->name), 'Succes!' );
+        return redirect()->route('pages');
+    }
+
+    /**
      * Mark resource as active / inactive
      *
      * @param  int  $id
@@ -125,7 +141,7 @@ class PageController extends Controller
      */
     public function mark($id, $status)
     {
-        $page = $this->api->get( sprintf('api/pages/%d/status/%d', $id, $status));
+        $page = $this->api->get( sprintf('api/pages/%d', $id));
 
         $this->api->get(sprintf('api/pages/%d/mark/%d', $id, $status));
 

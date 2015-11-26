@@ -43,6 +43,42 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Setting the authenticated user when creating a resource
+     */
+    public function save(array $options = array())
+    {
+        if( ! $this->created_by)
+        {
+            $this->created_by = Auth::id();
+        }
+        parent::save($options);
+    }
+
+    /**
+     * Setting the authenticated user when updating a resource
+     */
+    public function update(array $options = array())
+    {
+        if( ! $this->updated_by)
+        {
+            $this->updated_by = Auth::id();
+        }
+        parent::update($options);
+    }
+
+    /**
+     * Setting the authenticated user when deleting a resource
+     */
+    public function delete()
+    {
+        if( ! $this->deleted_by)
+        {
+            $this->deleted_by = Auth::id();
+        }
+        parent::delete();
+    }
+
 
     /**
      * Determine if a user is admin

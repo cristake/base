@@ -42,7 +42,8 @@
 @section('before-scripts-end') @stop
 @section('after-scripts-end')
 	<script>
-	    function rowStyle(row, index) {
+	    function rowStyle(row, index)
+	    {
 	        if ( row.deleted_at ) {
 	            return {
 	                classes: 'strikethrough warning'
@@ -70,6 +71,24 @@
 			return [inactive].join('');
 		}
 
+		function SectionsFormatter(index, row)
+		{
+			// var show_url = "{!! route('sections', ':id') !!}";
+			// show_url = show_url.replace(':id', row.id);
+
+			// var create_url = "{!! route('create_sections', ':id') !!}";
+			// create_url = create_url.replace(':id', row.id);
+
+			// var sections = '<a href="'+show_url+'" class="btn btn-primary" title="Vezi submeniurile"><i class="fa fa-list" data-toggle="tooltip" data-placement="top" title="" data-original-title="Vezi submeniurile"></i></a> ';
+
+			// var create = '<a href="'+create_url+'" class="btn btn-success" title="Adauga submeniuri"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Adauga submeniuri"></i></a> ';
+
+			// if( row.sections.length > 0 )
+			// 	return [sections, create].join('');
+			// else
+			// 	return [create].join('');
+		}
+
 		function ActionsFormatter(index, row)
 		{
 			var edit_url = "{!! route('pages_edit', ':id') !!}";
@@ -81,14 +100,19 @@
 			var restore_url = "{!! route('pages_restore', ':id') !!}";
 			restore_url = restore_url.replace(':id', row.id);
 
-			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-primary" title="Editeaza pagina"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza pagina"></i></a> ';
+			var forceDelete_url = "{!! route('pages_forceDelete', ':id') !!}";
+			forceDelete_url = forceDelete_url.replace(':id', row.id);
+
+			var edit = '<a href="'+edit_url+'" class="btn btn-sm btn-info" title="Editeaza pagina"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza pagina"></i></a> ';
 
 			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-sm btn-danger" title="Sterge pagina"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge pagina"></i></a> ';
 
-			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza pagina"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza pagina"></i></a> ';
+			var restore = '<a href="'+restore_url+'" class="btn btn-sm btn-success" title="Restaureaza pagina"><i class="fa fa-check" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza pagina"></i></a> ';
+
+			var forceDelete = '<a data-confirm="Esti sigur?" href="'+forceDelete_url+'" class="btn btn-sm btn-danger" title="Sterge definitiv pagina"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge definitiv pagina"></i></a> ';
 
 			if( row.deleted_at )
-				return [restore].join('');
+				return [restore, forceDelete].join('');
 			else
 				return [edit, destroy].join('');
 		}

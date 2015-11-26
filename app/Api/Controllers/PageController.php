@@ -45,7 +45,7 @@ class PageController extends Controller
      */
     public function show($id)
     {
-        $page = Page::findOrFail($id);
+        $page = Page::withTrashed()->findOrFail($id);
 
         return $this->response->item($page, new PageTransformer);
     }
@@ -74,7 +74,7 @@ class PageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Soft delete the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -82,7 +82,7 @@ class PageController extends Controller
     public function destroy($id)
     {
         $page = Page::findOrFail($id);
-        $page->destroy($id);
+        $page->delete($id);
         $page->status = 0;
         $page->update();
     }
@@ -96,6 +96,18 @@ class PageController extends Controller
     public function restore($id)
     {
         Page::withTrashed()->findOrFail($id)->restore();
+    }
+
+    /**
+     * Permanently remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($id)
+    {
+        $page = Page::withTrashed()->findOrFail($id);
+        $page->forceDelete($id);
     }
 
     /**
