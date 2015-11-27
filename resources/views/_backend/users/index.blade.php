@@ -28,7 +28,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					{{-- @can('create_users') --}}
-						{!! HTML::decode( link_to_route('users_create', '<i class="fa fa-plus"></i> Adauga utilizator nou', [], ['class' => 'btn btn-primary', 'title' => 'Adauga utilizator nou', 'id' => 'toolbar']) ) !!}
+						{!! HTML::decode( link_to_route('users_create', '<i class="fa fa-plus"></i> Adauga utilizator nou', [], ['class' => 'btn btn-info', 'title' => 'Adauga utilizator nou', 'id' => 'toolbar']) ) !!}
 					{{-- @endcan --}}
 
 					@include('_backend.users.includes.users-table')

@@ -28,7 +28,7 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					{{-- @can('create_pages') --}}
-						{!! HTML::decode( link_to_route('sections_create', '<i class="fa fa-plus"></i> Adauga o sectiune noua', $page->id, ['class' => 'btn btn-primary', 'title' => 'Adauga o sectiune noua', 'id' => 'toolbar']) ) !!}
+						{!! HTML::decode( link_to_route('sections_create', '<i class="fa fa-plus"></i> Adauga o sectiune noua', $page->id, ['class' => 'btn btn-info', 'title' => 'Adauga o sectiune noua', 'id' => 'toolbar']) ) !!}
 					{{-- @endcan --}}
 
 					@include('_backend.sections.includes.sections-table')
