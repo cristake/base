@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Kris\LaravelFormBuilder\FormBuilder;
+use App\Http\Forms\UserForm;
 
 /**
  * Class FrontendController
@@ -20,9 +22,7 @@ class UserController extends Controller
 	 */
 	public function index()
 	{
-		$users = $this->api->get('api/users');
-
-		return view('_backend.users.index', compact('users'));
+		return view('_backend.users.index');
 	}
 
     /**
@@ -30,9 +30,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(FormBuilder $form)
     {
-        return view('_backend.users.create');
+        $user_form = $form->create(UserForm::class, [
+                'method' => 'POST',
+                'url' => route('users_store'),
+                'class' => 'form-horizontal',
+                'data-name' => 'users-form',
+            ]);
+            // ->setName('users');
+
+        return view('_backend.users.create', compact('user_form'));
     }
 
     /**

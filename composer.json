@@ -13,7 +13,8 @@
         "silber/bouncer": "^0.0.20",
         "uxweb/sweet-alert": "^1.1",
         "lavary/laravel-menu": "dev-master",
-        "laravel/socialite": "^2.0"
+        "laravel/socialite": "^2.0",
+        "kris/laravel-form-builder": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -34,6 +35,9 @@
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
+        ],
+        "files": [
+            "tests/helpers.php"
         ]
     },
     "scripts": {

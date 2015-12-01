@@ -78,4 +78,6 @@ elixir(function(mix) {
 			"public/css/frontend.css", 
 			"public/js/frontend.js", 
 		]);
+
+	mix.phpUnit();
 });

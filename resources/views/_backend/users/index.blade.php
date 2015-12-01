@@ -79,15 +79,15 @@
 			var destroy_url = "{!! route('users_destroy', ':id') !!}";
 			destroy_url = destroy_url.replace(':id', row.id);
 
-			var restore_url = "{!! route('users_restore', ':id') !!}";
+			var restore_url = "{!! route('users_restore', ':id') !!}"; 
 			restore_url = restore_url.replace(':id', row.id);
 
 			var forceDelete_url = "{!! route('users_forceDelete', ':id') !!}";
 			forceDelete_url = forceDelete_url.replace(':id', row.id);
 
-			var edit = '<a href="'+edit_url+'" class="btn btn-info" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
+			var edit = '<a href="'+edit_url+'" id="edit" class="btn btn-info" title="Editeaza utilizator"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza utilizator"></i></a> ';
 
-			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" class="btn btn-danger" title="Sterge utilizatorul"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul"></i></a> ';
+			var destroy = '<a data-confirm="Esti sigur?" href="'+destroy_url+'" id="destroy" class="btn btn-danger" title="Sterge utilizatorul"><i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="" data-original-title="Sterge utilizatorul"></i></a> ';
 
 			var restore = '<a href="'+restore_url+'" class="btn btn-success" title="Restaureaza utilizator"><i class="fa fa-hdd-o" data-toggle="tooltip" data-placement="top" title="" data-original-title="Restaureaza utilizator"></i></a> ';
 

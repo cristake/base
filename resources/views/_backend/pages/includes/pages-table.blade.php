@@ -1,4 +1,5 @@
 <table
+	id="ajax_table"
 	data-content-type="application/json"
 	data-data-type="json"
 	data-toggle="table"

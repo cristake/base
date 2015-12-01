@@ -17,7 +17,7 @@
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
 				Adaugare utilizator nou
-				{!! HTML::decode( link_to_route('users', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
+				{!! HTML::decode( link_to_route('users', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-info pull-right']) ) !!}
 	        </h2>
 	    </div>
 	</div>
@@ -29,9 +29,10 @@
 				<div class="panel-body">
 
 					<!-- Form Display -->
-					{!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!}
-						@include('_backend.users.includes.user-form')
-					{!! Form::close() !!}
+					{!! form($user_form) !!}
+					{{-- {!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!} --}}
+						{{-- @include('_backend.users.includes.user-form') --}}
+					{{-- {!! Form::close() !!} --}}
 
 				</div><!--/.panel-body-->
 			</div>

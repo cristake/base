@@ -59,6 +59,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         User::firstOrNew($request->except(['_token', 'password_confirmation']))->save();
+
+        return $this->response->created();
     }
 
     /**

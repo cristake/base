@@ -155,6 +155,7 @@ return [
         Lavary\Menu\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
     ],
 
@@ -216,6 +217,7 @@ return [
         'Alert'         => UxWeb\SweetAlert\SweetAlert::class,
         'Sidebar'       => Lavary\Menu\Facade::class,
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
+        'FormBuilder'   => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
 
     ],
 
