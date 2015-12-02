@@ -3,7 +3,6 @@
 namespace Api\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JWTAuth;
@@ -17,8 +16,11 @@ class UserController extends Controller
 
     public function __construct(UserRepository $repo)
     {
-        // $this->middleware('jwt.auth');
+        // $this->middleware('jwt.auth', ['except' => 'getAuthenticatedUser']);
+
         $this->repo = $repo;
+
+        // parent::__construct();
     }
 
     /**
@@ -28,7 +30,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if(\Auth::user()->isAdminOrManager())
+        if(isset($this->user) && $this->user->isAdminOrManager())
             $users = $request->ajax() ? $this->repo->getAllWithTrashed() : $this->repo->filterWithTrashed( $request->all() );
         else
             $users = $request->ajax() ? $this->repo->getAll() : $this->repo->filter( $request->all() );
@@ -37,7 +39,9 @@ class UserController extends Controller
             'total' => count($users)
         ];
 
-        return $this->response->collection($users, new UserTransformer)->setMeta($meta);
+        return $this->response
+            ->collection($users, new UserTransformer)
+            ->setMeta($meta);
     }
 
     /**
@@ -50,7 +54,8 @@ class UserController extends Controller
     {
         $user = $this->repo->findWithTrashed($id);
 
-        return $this->response->item($user, new UserTransformer);
+        return $this->response
+            ->item($user, new UserTransformer);
     }
 
     /**
@@ -61,9 +66,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->repo->create($request->except(['_token', 'password_confirmation']));
+        $this->repo
+            ->create($request->except(['_token', 'password_confirmation']));
 
-        return $this->response->created();
+        return $this->response
+            ->created();
     }
 
     /**
@@ -75,7 +82,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->repo->update($id, $request->all());
+        $this->repo
+            ->update($id, $request->all());
     }
 
     /**
@@ -86,9 +94,13 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = $this->repo->find($id);
+        $user = $this
+            ->repo->find($id);
+
         $user->destroy($id);
+
         $user->status = 0;
+
         $user->update();
     }
 
@@ -100,7 +112,9 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        $this->repo->findWithTrashed($id)->restore();
+        $this->repo
+            ->findWithTrashed($id)
+            ->restore();
     }
 
     /**
@@ -111,7 +125,9 @@ class UserController extends Controller
      */
     public function forceDelete($id)
     {
-        $user = $this->repo->findWithTrashed($id);
+        $user = $this->repo
+            ->findWithTrashed($id);
+
         $user->forceDelete($id);
     }
 
@@ -123,10 +139,8 @@ class UserController extends Controller
      */
     public function mark($id, $status)
     {
-        $this->repo->update($id, compact('status'));
-        // $user = $this->repo->find($id);
-        // $user->status = $status;
-        // $user->update();
+        $this->repo
+            ->update($id, compact('status'));
     }
 
     /**

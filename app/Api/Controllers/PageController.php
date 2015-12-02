@@ -31,10 +31,7 @@ class PageController extends Controller
         // if(\Auth::user()->isAdminOrManager())
         //     $pages = Page::withTrashed()->get();
         // else
-        if($request->ajax())
-            $pages = $this->repo->getAll();
-        else
-            $pages = $this->repo->filter($request->all());
+        $request->ajax() ? $pages = $this->repo->getAll() : $pages = $this->repo->filter($request->all());
 
         $meta = [
             'total' => count($pages)
@@ -52,9 +49,11 @@ class PageController extends Controller
     public function show($id)
     {
         // $page = Page::withTrashed()->findOrFail($id);
-        $page = $this->repo->find($id);
+        $page = $this->repo
+            ->find($id);
 
-        return $this->response->item($page, new PageTransformer);
+        return $this->response
+            ->item($page, new PageTransformer);
     }
 
     /**
@@ -65,8 +64,8 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
-        // Page::firstOrNew($request->except('_token'))->save();
-        $this->repo->create( $request->except('_token') );
+        $this->repo
+            ->create( $request->except('_token') );
     }
 
     /**
@@ -78,8 +77,8 @@ class PageController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Page::findOrFail($id)->update($request->all());
-        $this->repo->update( $id, $request->except('_token') );
+        $this->repo
+            ->update( $id, $request->except('_token') );
     }
 
     /**
@@ -90,9 +89,13 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $page = Page::findOrFail($id);
+        $page = $this->repo
+            ->find($id);
+
         $page->delete($id);
+
         $page->status = 0;
+
         $page->update();
     }
 
@@ -127,8 +130,11 @@ class PageController extends Controller
      */
     public function mark($id, $status)
     {
-        $page = Page::findOrFail($id);
+        $page = $this->repo
+            ->find($id);
+
         $page->status = $status;
+
         $page->update();
     }
 

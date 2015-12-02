@@ -91,8 +91,9 @@ class AuthController extends Controller
             }
 
             Auth::logout();
+
             alert()->info('Contul tau a fost dezactivat!', 'Ne pare rau!');
-            return redirect()->route('login');
+            return redirect()->route('backend_login');
         } 
 
         alert()->error('Datele tale nu sunt corecte!', 'Eroare!');

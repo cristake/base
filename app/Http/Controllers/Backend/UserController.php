@@ -23,6 +23,7 @@ class UserController extends Controller
 	public function index()
 	{
 		return view('_backend.users.index');
+            // ->with(['token' => $this->token]);
 	}
 
     /**
@@ -52,7 +53,8 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-    	$this->api->post('api/users', $request->all());
+    	$this->api
+            ->post('api/users', $request->all());
 
         alert()->success(sprintf("Utilizatorul %s a fost creat!", $request->get('name')), 'Succes!');
         return redirect()->route('users');
@@ -77,7 +79,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->api->get('api/users/' . $id);
+        $user = $this->api
+        ->get('api/users/' . $id);
 
         return view('_backend.users.edit', compact('user'));
     }

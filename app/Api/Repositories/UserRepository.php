@@ -26,7 +26,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getAllWithTrashed()
     {
-        return $this->model->withTrashed()->get();
+        return $this->model
+            ->withTrashed()
+            ->get();
     }
 
     /**
@@ -35,7 +37,8 @@ class UserRepository implements UserRepositoryInterface
      */
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model
+            ->all();
     }
 
     /**
@@ -45,7 +48,8 @@ class UserRepository implements UserRepositoryInterface
      */
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model
+            ->findOrFail($id);
     }
 
     /**
@@ -55,7 +59,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findWithTrashed($id)
     {
-        return $this->model->withTrashed()->findOrFail($id);
+        return $this->model
+            ->withTrashed()
+            ->findOrFail($id);
     }
 
     /**
@@ -65,7 +71,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function create($request)
     {
-        return $this->model->firstOrNew($request)->save();
+        return $this->model
+            ->firstOrNew($request)
+            ->save();
     }
 
     /**
@@ -76,7 +84,9 @@ class UserRepository implements UserRepositoryInterface
      */
     public function update($id, $request)
     {
-        return $this->model->findOrFail($id)->update($request);
+        return $this->model
+            ->findOrFail($id)
+            ->update($request);
     }
 
     /**
@@ -112,7 +122,8 @@ class UserRepository implements UserRepositoryInterface
      */
     public function findByUserNameOrCreate($userData, $provider)
     {
-        $user = $this->model->where('provider_id', '=', $userData->id)->first();
+        $user = $this->model
+            ->where('provider_id', '=', $userData->id)->first();
 
         if(!$user) {
             $user = $this->model->create([

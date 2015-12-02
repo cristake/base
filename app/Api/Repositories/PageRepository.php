@@ -26,7 +26,8 @@ class PageRepository implements PageRepositoryInterface
      */
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model
+            ->all();
     }
 
     /**
@@ -36,7 +37,8 @@ class PageRepository implements PageRepositoryInterface
      */
     public function find($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model
+            ->findOrFail($id);
     }
 
     /**
@@ -46,7 +48,9 @@ class PageRepository implements PageRepositoryInterface
      */
     public function create($request)
     {
-        return $this->model->firstOrNew($request)->save();
+        return $this->model
+            ->firstOrNew($request)
+            ->save();
     }
 
     /**
@@ -57,7 +61,9 @@ class PageRepository implements PageRepositoryInterface
      */
     public function update($id, $request)
     {
-        return $this->model->findOrFail($id)->update($request);
+        return $this->model
+            ->findOrFail($id)
+            ->update($request);
     }
 
 
