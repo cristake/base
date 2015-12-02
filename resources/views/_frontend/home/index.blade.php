@@ -47,7 +47,17 @@
                         @foreach($pages as $page)
                             @if($page->parent_id == 0)
                                 <li class="{!! $page->hasChildren() ? 'dropdown' : '' !!}">
-                                    <a href="{{ $page->hasChildren() ? url($page->slug .'/'. $page->firstChild()->slug) : url($page->slug) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{!! $page->name !!} {!! $page->hasChildren() ? '<span class="caret"></span>' : '' !!}</a>
+                                    <a href="{{ $page->hasChildren() ? url(sprintf('%s/%s', $page->slug, $page->firstChild()->slug)) : url($page->slug) }}" 
+                                        class="dropdown-toggle" 
+                                        data-toggle="dropdown" 
+                                        role="button" 
+                                        aria-haspopup="true" 
+                                        aria-expanded="false"
+                                    >
+                                        {!! $page->name !!}
+                                        {!! $page->hasChildren() ? ' <span class="caret"></span>' : '' !!}
+                                    </a>
+
                                     @include('_frontend.home.submenus', ['id' => $page->id])
                                 </li>
                             @endif
@@ -55,9 +65,9 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../navbar/">Default</a></li>
-                        <li><a href="../navbar-static-top/">Static top</a></li>
-                        <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
+                        {{-- <li><a href="../navbar/">Default</a></li> --}}
+                        {{-- <li><a href="../navbar-static-top/">Static top</a></li> --}}
+                        {{-- <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> --}}
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

@@ -8,14 +8,17 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use App\Models\User;
+use Api\Repositories\UserRepository;
 use Api\Transformers\UserTransformer;
 
 class UserController extends Controller
 {
-    public function __construct()
+    protected $repo;
+
+    public function __construct(UserRepository $repo)
     {
         // $this->middleware('jwt.auth');
+        $this->repo = $repo;
     }
 
     /**
@@ -23,12 +26,12 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // if(\Auth::user()->isAdminOrManager())
-            $users = User::withTrashed()->get();
-        // else
-            // $users = User::all();
+        if(\Auth::user()->isAdminOrManager())
+            $users = $request->ajax() ? $this->repo->getAllWithTrashed() : $this->repo->filterWithTrashed( $request->all() );
+        else
+            $users = $request->ajax() ? $this->repo->getAll() : $this->repo->filter( $request->all() );
 
         $meta = [
             'total' => count($users)
@@ -45,7 +48,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::withTrashed()->findOrFail($id);
+        $user = $this->repo->findWithTrashed($id);
 
         return $this->response->item($user, new UserTransformer);
     }
@@ -58,7 +61,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::firstOrNew($request->except(['_token', 'password_confirmation']))->save();
+        $this->repo->create($request->except(['_token', 'password_confirmation']));
 
         return $this->response->created();
     }
@@ -72,7 +75,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        User::findOrFail($id)->update($request->all());
+        $this->repo->update($id, $request->all());
     }
 
     /**
@@ -83,7 +86,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->repo->find($id);
         $user->destroy($id);
         $user->status = 0;
         $user->update();
@@ -97,7 +100,7 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        User::withTrashed()->findOrFail($id)->restore();
+        $this->repo->findWithTrashed($id)->restore();
     }
 
     /**
@@ -108,7 +111,7 @@ class UserController extends Controller
      */
     public function forceDelete($id)
     {
-        $user = User::withTrashed()->findOrFail($id);
+        $user = $this->repo->findWithTrashed($id);
         $user->forceDelete($id);
     }
 
@@ -118,11 +121,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function mark(Request $request, $id, $status)
+    public function mark($id, $status)
     {
-        $user = User::findOrFail($id);
-        $user->status = $status;
-        $user->update();
+        $this->repo->update($id, compact('status'));
+        // $user = $this->repo->find($id);
+        // $user->status = $status;
+        // $user->update();
     }
 
     /**

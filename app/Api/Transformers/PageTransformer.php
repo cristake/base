@@ -45,7 +45,7 @@ class PageTransformer extends TransformerAbstract
             'id'            => (int) $page->id,
             'name'          => $page->name,
             'slug'          => $page->hasParent() ? $page->getParent()->slug . '/' . $page->slug : $page->slug,
-            'parent'        => $page->hasParent() ? $page->getParent()->name : '-',
+            'parent'        => $page->hasParent() ? $page->getParent()->name : 'none',
             'created_by'    => $page->created_by ? $page->user->name : null,
             'updated_by'    => $page->updated_by ? $page->user->name : null,
             'deleted_by'    => $page->deleted_by ? $page->user->name : null,

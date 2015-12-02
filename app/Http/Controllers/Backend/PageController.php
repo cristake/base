@@ -28,7 +28,10 @@ class PageController extends Controller
      */
     public function create()
     {
-        $pages = $this->api->get('api/pages');
+        // Filtering only the pages without children
+        $pages = $this->api
+            ->with(['parent_id' => 0])
+            ->get('api/pages');
 
         return view('_backend.pages.create', compact('pages'));
     }
@@ -66,7 +69,11 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $pages = $this->api->get('api/pages');
+        // Filtering only the pages without children
+        $pages = $this->api
+            ->with(['parent_id' => 0])
+            ->get('api/pages');
+
         $page = $this->api->get('api/pages/' . $id);
 
         return view('_backend.pages.edit', compact('pages', 'page'));

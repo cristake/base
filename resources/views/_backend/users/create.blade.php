@@ -29,10 +29,10 @@
 				<div class="panel-body">
 
 					<!-- Form Display -->
-					{!! form($user_form) !!}
-					{{-- {!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!} --}}
-						{{-- @include('_backend.users.includes.user-form') --}}
-					{{-- {!! Form::close() !!} --}}
+					{{-- {!! form($user_form) !!} --}}
+					{!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!}
+						@include('_backend.users.includes.user-form')
+					{!! Form::close() !!}
 
 				</div><!--/.panel-body-->
 			</div>

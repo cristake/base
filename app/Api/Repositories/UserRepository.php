@@ -4,14 +4,118 @@ namespace Api\Repositories;
 
 use App\Models\User;
 
-class UserRepository
+class UserRepository implements UserRepositoryInterface
 {
+    /**
+     * @var Model
+     */
+    protected $model;
+
+    /**
+     * Inject the model
+     * @param User $model 
+     */
+    public function __construct(User $model)
+    {
+        $this->model = $model;
+    }
+
+    /**
+     * Get all resources including soft deletes
+     * @return collection
+     */
+    public function getAllWithTrashed()
+    {
+        return $this->model->withTrashed()->get();
+    }
+
+    /**
+     * Get all resources without soft deletes
+     * @return collection
+     */
+    public function getAll()
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Find a specific resource item
+     * @param  integer $id 
+     * @return Item
+     */
+    public function find($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+
+    /**
+     * Find a specific resourse including soft deletes
+     * @param  integer $id
+     * @return Item
+     */
+    public function findWithTrashed($id)
+    {
+        return $this->model->withTrashed()->findOrFail($id);
+    }
+
+    /**
+     * Creates a new resource
+     * @param  array $request 
+     * @return response
+     */
+    public function create($request)
+    {
+        return $this->model->firstOrNew($request)->save();
+    }
+
+    /**
+     * Updates a resource
+     * @param  array $request
+     * @param  integer $id
+     * @return response
+     */
+    public function update($id, $request)
+    {
+        return $this->model->findOrFail($id)->update($request);
+    }
+
+    /**
+     * Filter the results, without trashed
+     * @param  array  $params
+     * @return collection
+     */
+    public function filter($params = [])
+    {
+        return $this->model
+            ->where($params)
+            ->get();
+    }
+
+    /**
+     * Filter the results, with trashed
+     * @param  array  $params
+     * @return collection
+     */
+    public function filterWithTrashed($params = [])
+    {
+        return $this->model
+            ->withTrashed()
+            ->where($params)
+            ->get();
+    }
+
+    /**
+     * [findByUserNameOrCreate description]
+     * @param  [type] $userData [description]
+     * @param  [type] $provider [description]
+     * @return [type]           [description]
+     */
     public function findByUserNameOrCreate($userData, $provider)
     {
-        $user = User::where('provider_id', '=', $userData->id)->first();
+        $user = $this->model->where('provider_id', '=', $userData->id)->first();
 
         if(!$user) {
-            $user = User::create([
+            $user = $this->model->create([
                 'provider'		=> $provider,
                 'provider_id'	=> $userData->id,
                 'name'			=> $userData->name,
@@ -26,6 +130,12 @@ class UserRepository
         return $user;
     }
 
+    /**
+     * [checkIfUserNeedsUpdating description]
+     * @param  [type] $userData [description]
+     * @param  [type] $user     [description]
+     * @return [type]           [description]
+     */
     public function checkIfUserNeedsUpdating($userData, $user)
     {
         $socialData = [

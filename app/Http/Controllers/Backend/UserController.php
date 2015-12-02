@@ -9,7 +9,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Kris\LaravelFormBuilder\FormBuilder;
-use App\Http\Forms\UserForm;
+// use App\Http\Forms\UserForm;
 
 /**
  * Class FrontendController
@@ -32,15 +32,16 @@ class UserController extends Controller
      */
     public function create(FormBuilder $form)
     {
-        $user_form = $form->create(UserForm::class, [
-                'method' => 'POST',
-                'url' => route('users_store'),
-                'class' => 'form-horizontal',
-                'data-name' => 'users-form',
-            ]);
+        // $user_form = $form->create(UserForm::class, [
+        //         'method' => 'POST',
+        //         'url' => route('users_store'),
+        //         'class' => 'form-horizontal',
+        //         'data-name' => 'users-form',
+        //     ]);
             // ->setName('users');
 
-        return view('_backend.users.create', compact('user_form'));
+        // return view('_backend.users.create', compact('user_form'));
+        return view('_backend.users.create');
     }
 
     /**
@@ -154,7 +155,7 @@ class UserController extends Controller
 
         $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
 
-        $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($user->status == 1 ? "activat!" : "dezactivat!")) );
+        $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($status == 1 ? "activat!" : "dezactivat!")) );
         alert()->success($message, 'Succes!');
 
         return redirect()->back();
