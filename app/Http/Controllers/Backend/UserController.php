@@ -8,8 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Kris\LaravelFormBuilder\FormBuilder;
-// use App\Http\Forms\UserForm;
 
 /**
  * Class FrontendController
@@ -23,7 +21,6 @@ class UserController extends Controller
 	public function index()
 	{
 		return view('_backend.users.index');
-            // ->with(['token' => $this->token]);
 	}
 
     /**
@@ -31,17 +28,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(FormBuilder $form)
+    public function create()
     {
-        // $user_form = $form->create(UserForm::class, [
-        //         'method' => 'POST',
-        //         'url' => route('users_store'),
-        //         'class' => 'form-horizontal',
-        //         'data-name' => 'users-form',
-        //     ]);
-            // ->setName('users');
-
-        // return view('_backend.users.create', compact('user_form'));
         return view('_backend.users.create');
     }
 
@@ -53,9 +41,6 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-    	$this->api
-            ->post('api/users', $request->all());
-
         alert()->success(sprintf("Utilizatorul %s a fost creat!", $request->get('name')), 'Succes!');
         return redirect()->route('users');
     }
@@ -68,7 +53,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        // return $this->api->get('api/users/' . $id);
+        // 
     }
 
     /**
@@ -79,9 +64,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->api
-        ->get('api/users/' . $id);
-
         return view('_backend.users.edit', compact('user'));
     }
 
@@ -94,8 +76,6 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $this->api->put('api/users/'. $id, $request->all());
-
         alert()->success(sprintf("Utilizatorul %s a fost editat!", $request->get('name')), 'Succes!');
         return redirect()->route('users');
     }
@@ -108,10 +88,6 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = $this->api->get('api/users/' . $id);
-
-        $this->api->delete('api/users/'. $id);
-
         alert()->success( sprintf('Utilizatorul %s a fost sters!', $user->name), 'Succes!' );
         return redirect()->route('users');
     }
@@ -124,8 +100,6 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        $this->api->get( sprintf('api/users/%d/restore', $id) );
-
         alert()->success( 'Utilizatorul a fost restaurat!', 'Success' );
         return redirect()->route('users');
     }
@@ -138,10 +112,6 @@ class UserController extends Controller
      */
     public function forceDelete($id)
     {
-        $user = $this->api->get('api/users/' . $id);
-
-        $this->api->get(sprintf('api/users/%d/forceDelete', $id));
-
         alert()->success( sprintf('Utilizatorul %s a fost sters definitiv!', $user->name), 'Succes!' );
         return redirect()->route('users');
     }
@@ -154,10 +124,6 @@ class UserController extends Controller
      */
     public function mark($id, $status)
     {
-        $user = $this->api->get('api/users/' . $id);
-
-        $this->api->get(sprintf('api/users/%d/mark/%d', $id, $status));
-
         $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($status == 1 ? "activat!" : "dezactivat!")) );
         alert()->success($message, 'Succes!');
 

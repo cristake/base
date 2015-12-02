@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePageRequest;
@@ -28,11 +27,6 @@ class PageController extends Controller
      */
     public function create()
     {
-        // Filtering only the pages without children
-        $pages = $this->api
-            ->with(['parent_id' => 0])
-            ->get('api/pages');
-
         return view('_backend.pages.create', compact('pages'));
     }
 
@@ -44,8 +38,6 @@ class PageController extends Controller
      */
     public function store(CreatePageRequest $request)
     {
-        $this->api->post('api/pages', $request->all());
-
         alert()->success(sprintf("Pagina %s a fost creat!", $request->get('name')), 'Succes!');
         return redirect()->route('pages');
     }
@@ -69,13 +61,6 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        // Filtering only the pages without children
-        $pages = $this->api
-            ->with(['parent_id' => 0])
-            ->get('api/pages');
-
-        $page = $this->api->get('api/pages/' . $id);
-
         return view('_backend.pages.edit', compact('pages', 'page'));
     }
 
@@ -88,8 +73,6 @@ class PageController extends Controller
      */
     public function update(UpdatePageRequest $request, $id)
     {
-        $this->api->put('api/pages/'. $id, $request->all());
-
         alert()->success(sprintf("Pagina %s a fost editata!", $request->get('name')), 'Succes!');
         return redirect()->route('pages');
     }
@@ -102,10 +85,6 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $page = $this->api->get('api/pages/' . $id);
-
-        $this->api->delete('api/pages/'. $id);
-
         alert()->success( sprintf('Pagina %s a fost stearsa!', $page->name), 'Succes!' );
         return redirect()->route('pages');
     }
@@ -118,8 +97,6 @@ class PageController extends Controller
      */
     public function restore($id)
     {
-        $this->api->get( sprintf('api/pages/%d/restore', $id) );
-
         alert()->success( 'Pagina a fost restaurata!', 'Success' );
         return redirect()->route('pages');
     }
@@ -132,10 +109,6 @@ class PageController extends Controller
      */
     public function forceDelete($id)
     {
-        $page = $this->api->get('api/pages/' . $id);
-
-        $this->api->get(sprintf('api/pages/%d/forceDelete', $id));
-
         alert()->success( sprintf('Pagina %s a fost stearsa definitiv!', $page->name), 'Succes!' );
         return redirect()->route('pages');
     }
@@ -148,10 +121,6 @@ class PageController extends Controller
      */
     public function mark($id, $status)
     {
-        $page = $this->api->get( sprintf('api/pages/%d', $id));
-
-        $this->api->get(sprintf('api/pages/%d/mark/%d', $id, $status));
-
         $message = ( sprintf("Pagina %s a fost %s", $page->name, ($page->status == 1 ? "activata!" : "dezactivata!")) );
         alert()->success($message, 'Succes!');
 

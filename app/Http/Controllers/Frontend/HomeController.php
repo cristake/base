@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Page;
-use JWTAuth;
 
 class HomeController extends Controller
 {

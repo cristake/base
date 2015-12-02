@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,8 +15,6 @@ class SectionController extends Controller
      */
     public function index($page_id)
     {
-        $page = $this->api->get( sprintf('api/pages/%d', $page_id) );
-
         return view('_backend.sections.index', compact('page'));
     }
 
@@ -28,9 +25,6 @@ class SectionController extends Controller
      */
     public function create($page_id)
     {
-        $page = $this->api->get( sprintf('api/pages/%d', $page_id) );
-        $pages = $this->api->get('api/pages');
-
         return view('_backend.sections.create', compact('pages', 'page'));
     }
 
@@ -42,8 +36,6 @@ class SectionController extends Controller
      */
     public function store(Request $request, $page_id)
     {
-        $this->api->post('api/sections', $request->all());
-
         alert()->success(sprintf("Sectiunea %s a fost creata!", $request->get('title')), 'Succes!');
         return redirect()->route('sections');
     }
