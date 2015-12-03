@@ -144,7 +144,6 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\UserRepositoryServiceProvider::class,
 
         /*
          * 3rd Party Service Providers...

@@ -35,22 +35,11 @@ class SidebarMiddleware
             $menu->add('Continut', '#sub-menu-continut')
                 ->prepend('<svg class="glyph stroked app window with content"><use xlink:href="#stroked-app-window-with-content"/></svg>')
                 ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
-                // ->active('admin/content/*')
                 ->data('visible', true);
                 // DISPLAY ALL PAGES
                 $menu->add('Pagini', ['route' => 'pages', 'parent' => $menu->continut->id])
                     ->active('admin/content/pages/*')
                     ->data('visible', true);
-
-            /*
-            |--------------------------------------------------------------------------
-            | USERS
-            |--------------------------------------------------------------------------
-            */
-            $menu->add('Utilizatori', ['route' => 'users'])
-                ->prepend('<svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg>')
-                ->active('admin/users/*')
-                ->data('visible', true);
 
             /*
             |--------------------------------------------------------------------------
@@ -60,9 +49,17 @@ class SidebarMiddleware
             $menu->add('Setari', '#sub-menu-setari')
                 ->prepend('<svg class="glyph stroked gear"><use xlink:href="#stroked-gear"/></svg>')
                 ->append('<span class="icon pull-right"><em class="fa fa-chevron-right"></em></span> ')
-                ->data('visible', false);
+                ->data('visible', true);
+                // USERS
+                $menu->add('Utilizatori', ['route' => 'users', 'parent' => $menu->setari->id])
+                     ->active('admin/settings/users/*')
+                     ->data('visible', true);
+                // ROLES
+                $menu->add('Roluri', ['route' => 'roles', 'parent' => $menu->setari->id])
+                     ->active('admin/settings/roles/*')
+                     ->data('visible', true);
                 // ABILITIES
-                $menu->add('Abilitati', ['route' => 'users', 'parent' => $menu->setari->id])
+                $menu->add('Abilitati', ['route' => 'abilities', 'parent' => $menu->setari->id])
                      ->active('admin/settings/abilities/*')
                      ->data('visible', true);
         });

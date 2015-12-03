@@ -31,7 +31,7 @@
 					<!-- Form Display -->
 					{{-- {!! form($user_form) !!} --}}
 					{!! Form::open(['route' => 'users_store', 'class' => 'form-horizontal', 'method' => 'POST']) !!}
-						@include('_backend.users.includes.user-form')
+						@include('_backend.users.includes.users-form')
 					{!! Form::close() !!}
 
 				</div><!--/.panel-body-->

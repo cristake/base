@@ -11715,11 +11715,10 @@ var icons = '<svg id="glyphs-sheet" xmlns=\"http://www.w3.org/2000/svg\" style=\
 $(document).ready(function() {
 
 	var continut = $.cookie('continut');
-	var continut_icon = $(this).find('#continutCollapse i:first');
+	var continut_icon = $(this).find('#continutCollapse em:first');
 
 	$('ul.nav li.parent a#continutCollapse').click(function() {
 
-		// $(this).find('em:first').toggleClass("fa-chevron-down");
 		continut_icon.toggleClass("fa-chevron-down");
 
 		if(continut != null) {
@@ -11744,11 +11743,10 @@ $(document).ready(function() {
 $(document).ready(function() {
 
 	var setari = $.cookie('setari');
-	var setari_icon = $(this).find('#setariCollapse i:first');
+	var setari_icon = $(this).find('#setariCollapse em:first');
 
 	$('ul.nav li.parent a#setariCollapse').click(function() {
 
-		// $(this).find('em:first').toggleClass("fa-chevron-down");
 		setari_icon.toggleClass("fa-chevron-down");
 
 		if(setari != null) {

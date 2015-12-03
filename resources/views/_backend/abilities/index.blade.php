@@ -1,7 +1,7 @@
 @extends('_backend._layouts.master')
 
 @section('meta')
-    <title>Utilizatori</title>
+    <title>Abilitati</title>
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -17,7 +17,7 @@
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
 				{!! ucfirst( last( Request::segments() ) ) !!}
-				<small class="pull-right">Administrare utilizatori</small>
+				<small class="pull-right">Administrare abilitati</small>
 	        </h2>
 	    </div>
 	</div>
@@ -27,11 +27,11 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					@can('create_users')
-						{!! HTML::decode( link_to_route('users_create', '<i class="fa fa-plus"></i> Adauga utilizator nou', [], ['class' => 'btn btn-info', 'title' => 'Adauga utilizator nou', 'id' => 'toolbar']) ) !!}
-					@endcan
+					{{-- @can('create_abilities') --}}
+						{!! HTML::decode( link_to_route('abilities_create', '<i class="fa fa-plus"></i> Adauga abilitate noua', [], ['class' => 'btn btn-info', 'title' => 'Adauga abilitate noua', 'id' => 'toolbar']) ) !!}
+					{{-- @endcan --}}
 
-					@include('_backend.users.includes.users-table')
+					@include('_backend.abilities.includes.abilities-table')
 
 				</div>
 			</div>
@@ -39,56 +39,25 @@
 	</div><!--/.row-->
 @stop
 
-<!-- CUSTOM FOOTER -->
 @section('before-scripts-end') @stop
-
 @section('after-scripts-end')
 	<script>
 		var $table = $('#table');
 
-		$table.bootstrapTable({data: users});
-
-	    function rowStyle(row, index)
-	    {
-	        if ( row.deleted_at ) {
-	            return {
-	                classes: 'strikethrough warning'
-	            };
-	        }
-	        return {};
-	    }
-
-		function StatusFormatter(index, row)
-		{
-			var mark_url = "{!! route('mark_users', [':id', ':status']) !!}";
-			mark_url = mark_url.replace(':id', row.id);
-			mark_url = mark_url.replace(':status', row.status == true ? 0 : 1);
-
-			var active = '<a href="'+mark_url+'" class="btn btn-warning" title="Dezactiveaza"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza"></i>&nbsp;Activ</a> ';
-
-			var inactive = '<a href="'+mark_url+'" class="btn btn-success" title="Activeaza"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza"></i>&nbsp;Inactiv</a> ';
-
-			if( row.status )
-				return [active].join('');
-
-			if( row.deleted_at )
-				return '';
-
-			return [inactive].join('');
-		}
+		$table.bootstrapTable({data: abilities});
 
 		function ActionsFormatter(index, row)
 		{
-			var edit_url = "{!! route('users_edit', ':id') !!}";
+			var edit_url = "{!! route('abilities_edit', ':id') !!}";
 			edit_url = edit_url.replace(':id', row.id);
 
-			var destroy_url = "{!! route('users_destroy', ':id') !!}";
+			var destroy_url = "{!! route('abilities_destroy', ':id') !!}";
 			destroy_url = destroy_url.replace(':id', row.id);
 
-			var restore_url = "{!! route('users_restore', ':id') !!}"; 
+			var restore_url = "{!! route('abilities_restore', ':id') !!}"; 
 			restore_url = restore_url.replace(':id', row.id);
 
-			var forceDelete_url = "{!! route('users_forceDelete', ':id') !!}";
+			var forceDelete_url = "{!! route('abilities_forceDelete', ':id') !!}";
 			forceDelete_url = forceDelete_url.replace(':id', row.id);
 
 			var edit = '<a href="'+edit_url+'" id="edit" class="btn btn-info" title="Editeaza"><i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="" data-original-title="Editeaza"></i></a> ';

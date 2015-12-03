@@ -20,6 +20,13 @@ class Ability extends Model
 	 */
 	protected $guarded = ['id'];
 
+    /**
+     * make the name snake case
+     */
+    public function setNameAttribute($value) {
+        $this->attributes['name'] = str_replace( ' ', '_', strtolower($value) );
+    }
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Models\User;
+use App\Models\User as Model;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     /**
      * @var Model
@@ -13,9 +13,9 @@ class UserRepository implements UserRepositoryInterface
 
     /**
      * Inject the model
-     * @param User $model 
+     * @param Model $model 
      */
-    public function __construct(User $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -32,27 +32,6 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
-     * Get all resources without soft deletes
-     * @return collection
-     */
-    public function getAll()
-    {
-        return $this->model
-            ->all();
-    }
-
-    /**
-     * Find a specific resource item
-     * @param  integer $id 
-     * @return Item
-     */
-    public function find($id)
-    {
-        return $this->model
-            ->findOrFail($id);
-    }
-
-    /**
      * Find a specific resourse including soft deletes
      * @param  integer $id
      * @return Item
@@ -62,44 +41,6 @@ class UserRepository implements UserRepositoryInterface
         return $this->model
             ->withTrashed()
             ->findOrFail($id);
-    }
-
-    /**
-     * Creates a new resource
-     * @param  array $request 
-     * @return response
-     */
-    public function create($request)
-    {
-        return $this->model
-            ->create($request);
-            // ->firstOrNew($request)
-            // ->save();
-    }
-
-    /**
-     * Updates a resource
-     * @param  array $request
-     * @param  integer $id
-     * @return response
-     */
-    public function update($id, $request)
-    {
-        return $this->model
-            ->findOrFail($id)
-            ->update($request);
-    }
-
-    /**
-     * Filter the results, without trashed
-     * @param  array  $params
-     * @return collection
-     */
-    public function filter($params = [])
-    {
-        return $this->model
-            ->where($params)
-            ->get();
     }
 
     /**

@@ -1,28 +1,12 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-use App\Models\Page;
-
-class PageRepository implements PageRepositoryInterface
+abstract class BaseRepository
 {
     /**
-     * @var Model
-     */
-    protected $model;
-
-    /**
-     * Inject the model
-     * @param Page $model 
-     */
-    public function __construct(Page $model)
-    {
-        $this->model = $model;
-    }
-
-    /**
-     * Get all the resources
-     * @return collection 
+     * Get all resources without soft deletes
+     * @return collection
      */
     public function getAll()
     {
@@ -30,8 +14,9 @@ class PageRepository implements PageRepositoryInterface
             ->all();
     }
 
+
     /**
-     * Get a specific resource item
+     * Find a specific resource item
      * @param  integer $id 
      * @return Item
      */
@@ -41,6 +26,7 @@ class PageRepository implements PageRepositoryInterface
             ->findOrFail($id);
     }
 
+
     /**
      * Creates a new resource
      * @param  array $request 
@@ -49,8 +35,7 @@ class PageRepository implements PageRepositoryInterface
     public function create($request)
     {
         return $this->model
-            ->firstOrNew($request)
-            ->save();
+            ->create($request);
     }
 
     /**
@@ -61,12 +46,19 @@ class PageRepository implements PageRepositoryInterface
      */
     public function update($id, $request)
     {
-        return $this->model
-            ->findOrFail($id)
-            ->update($request);
+        $model = $this->model
+            ->findOrFail($id);
+
+        $model->update($request);
+
+        return $model;
     }
 
-
+    /**
+     * Filter the results, without trashed
+     * @param  array  $params
+     * @return collection
+     */
     public function filter($params = [])
     {
         return $this->model

@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Repositories;
+namespace App\Repositories;
 
-interface PageRepositoryInterface
+interface RoleRepositoryInterface
 {
 	public function getAll();
 
-	public function find($id);
+	public function listsAll();
 
 	public function create($request);
+
+	public function find($id);
 
 	public function update($id, $request);
 
 	public function filter($params);
+
 }

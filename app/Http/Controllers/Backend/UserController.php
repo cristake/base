@@ -7,7 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepositoryInterface;
+use App\Repositories\RoleRepositoryInterface;
 use JavaScript;
 
 /**
@@ -16,11 +17,28 @@ use JavaScript;
  */
 class UserController extends Controller
 {
-    protected $repo;
+    /**
+     * @var UserRepositoryInterface
+     */
+    protected $userRepo;
 
-    public function __construct(UserRepositoryInterface $repo)
+    /**
+     * @var RoleRepositoryInterface
+     */
+    protected $roleRepo;
+
+    /**
+     * Inject the interface
+     * @param UserRepositoryInterface $userRepo 
+     * @param RoleRepositoryInterface $roleRepo 
+     */
+    public function __construct(
+        UserRepositoryInterface $userRepo,
+        RoleRepositoryInterface $roleRepo
+    )
     {
-        $this->repo = $repo;
+        $this->userRepo = $userRepo;
+        $this->roleRepo = $roleRepo;
     }
 
 	/**
@@ -29,10 +47,10 @@ class UserController extends Controller
 	public function index()
 	{
         JavaScript::put([
-            'users' => $this->repo->getAllWithTrashed()
+            'users' => $this->userRepo->getAllWithTrashed()
         ]);
 
-		return view('_backend.users.index');
+        return view('_backend.users.index');
 	}
 
     /**
@@ -42,7 +60,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('_backend.users.create');
+        $roles = $this->roleRepo->listsAll();
+
+        return view('_backend.users.create', compact('roles'));
     }
 
     /**
@@ -53,9 +73,10 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $this->repo->create($request->except('_token'));
+        $user = $this->userRepo->create($request->except('_token'));
+        $user->roles()->attach($request->get('role'));
 
-        alert()->success(sprintf("Utilizatorul %s a fost creat!", $request->get('name')), 'Succes!');
+        alert()->success(sprintf("Utilizatorul %s a fost creat!", $user->name), 'Succes!');
         return redirect()->route('users');
     }
 
@@ -78,9 +99,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = $this->repo->find($id);
+        $user = $this->userRepo->find($id);
+        $roles = $this->roleRepo->listsAll();
 
-        return view('_backend.users.edit', compact('user'));
+        return view('_backend.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -92,9 +114,10 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $this->repo->update($id, $request->except('_token'));
+        $user = $this->userRepo->update($id, $request->except('_token'));
+        $user->roles()->sync([$request->get('role')]);
 
-        alert()->success(sprintf("Utilizatorul %s a fost editat!", $request->get('name')), 'Succes!');
+        alert()->success(sprintf("Utilizatorul %s a fost editat!", $user->name), 'Succes!');
         return redirect()->route('users');
     }
 
@@ -106,7 +129,7 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $user = $this->repo->find($id);
+        $user = $this->userRepo->find($id);
 
         $user->status = 0;
         $user->update();
@@ -125,7 +148,7 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        $user = $this->repo
+        $user = $this->userRepo
             ->findWithTrashed($id);
 
         $user->restore();
@@ -145,7 +168,7 @@ class UserController extends Controller
      */
     public function forceDelete($id)
     {
-        $user = $this->repo
+        $user = $this->userRepo
             ->findWithTrashed($id);
 
         $user->forceDelete($id);
@@ -162,10 +185,10 @@ class UserController extends Controller
      */
     public function mark($id, $status)
     {
-        $user = $this->repo
+        $user = $this->userRepo
             ->find($id);
 
-        $this->repo
+        $this->userRepo
             ->update($id, compact('status'));
 
         $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($status == 1 ? "activat!" : "dezactivat!")) );

@@ -34,12 +34,12 @@
 	}
 }
 
-// .sidebar ul.nav a, 
-// .sidebar ul.nav li.parent ul li a {
-// 	text-decoration: none;
-// 	color: $white;
-// 	background-color: $primary;
-// }
+.sidebar ul.nav ul.children li.active a,
+.sidebar ul.nav li.parent a.active {
+	text-decoration: none;
+	color: $primary !important;
+	background-color: $default;
+}
 
 .sidebar ul.nav a:hover, 
 .sidebar ul.nav li.parent ul li a:hover {
@@ -47,11 +47,24 @@
 	background-color: $default;
 }
 
-.sidebar ul.nav .active a, .sidebar ul.nav li.parent a.active,
-.sidebar ul.nav .active > a:hover, .sidebar ul.nav li.parent a.active:hover,
-.sidebar ul.nav .active > a:focus, .sidebar ul.nav li.parent a.active:focus {
-	color: $white;
+.sidebar ul.nav .active a,
+.sidebar ul.nav .active > a:hover,
+.sidebar ul.nav .active > a:focus {
+	color: $white !important;
 	background-color: $primary;
+}
+
+.sidebar ul.nav .active a:hover {
+	text-decoration: none;
+	background-color: darken($primary, 5%);
+}
+
+.sidebar ul.nav li.parent ul li.active a:hover,
+.sidebar ul.nav li.parent a.active:hover,
+.sidebar ul.nav li.parent a.active:focus {
+	text-decoration: none;
+	color: $primary !important;
+	background-color: darken($default, 5%);
 }
 
 .sidebar ul.nav ul,
@@ -64,18 +77,17 @@
 	width: auto;
 	padding: 0;
 	margin: 0;
-	background: $light-gray;
 }
 
 .sidebar ul.nav ul.children li a {
 	height: 40px;
-	background: $light-gray;
-	color: $primary!important;
+	background: $white;
+	color: $primary !important;
 }
 
 .sidebar ul.nav li.current a {
 	background-color: $primary;
-	color: $white!important;
+	color: $white !important;
 }
 
 .sidebar ul.nav li.parent ul li a {

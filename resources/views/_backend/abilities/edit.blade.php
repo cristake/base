@@ -1,7 +1,7 @@
 @extends('_backend._layouts.master')
 
 @section('meta')
-    <title>Editare utilizator {!! $user->name !!}</title>
+    <title>Editare rol {!! $role->name !!}</title>
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -16,8 +16,8 @@
 	<div class="row">
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
-				Editare utilizator "{!! $user->name !!}"
-				{!! HTML::decode( link_to_route('users', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
+				Editare rol {!! $role->name !!}"
+				{!! HTML::decode( link_to_route('roles', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
 	        </h2>
 	    </div>
 	</div>
@@ -29,8 +29,8 @@
 				<div class="panel-body">
 
 					<!-- Form Display -->
-					{!! Form::model($user, ['route' => ['users_update', $user->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
-						@include('_backend.users.includes.users-form')
+					{!! Form::model($role, ['route' => ['roles_update', $role->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
+						@include('_backend.roles.includes.roles-form')
 					{!! Form::close() !!}
 
 				</div><!--/.panel-body-->
