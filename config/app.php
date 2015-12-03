@@ -144,10 +144,12 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\UserRepositoryServiceProvider::class,
 
         /*
          * 3rd Party Service Providers...
          */
+        Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Silber\Bouncer\BouncerServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Lavary\Menu\ServiceProvider::class,
@@ -206,10 +208,11 @@ return [
         /*
          * 3rd Party Aliases...
          */
-        'Form'          => Illuminate\Html\FormFacade::class,
-        'HTML'          => Illuminate\Html\HtmlFacade::class,
-        'Bouncer'       => Silber\Bouncer\BouncerFacade::class,
         'Alert'         => UxWeb\SweetAlert\SweetAlert::class,
+        'Bouncer'       => Silber\Bouncer\BouncerFacade::class,
+        'Form'          => Illuminate\Html\FormFacade::class,
+        'JavaScript'    => Laracasts\Utilities\JavaScriptFacade::class,
+        'HTML'          => Illuminate\Html\HtmlFacade::class,
         'Sidebar'       => Lavary\Menu\Facade::class,
         'Socialite'     => Laravel\Socialite\Facades\Socialite::class,
 

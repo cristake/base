@@ -7,7 +7,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\User;
+use App\Http\Repositories\UserRepositoryInterface;
+use JavaScript;
 
 /**
  * Class FrontendController
@@ -15,11 +16,22 @@ use App\Models\User;
  */
 class UserController extends Controller
 {
+    protected $repo;
+
+    public function __construct(UserRepositoryInterface $repo)
+    {
+        $this->repo = $repo;
+    }
+
 	/**
 	 * @return \Illuminate\View\View
 	 */
 	public function index()
 	{
+        JavaScript::put([
+            'users' => $this->repo->getAllWithTrashed()
+        ]);
+
 		return view('_backend.users.index');
 	}
 
@@ -41,6 +53,8 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        $this->repo->create($request->except('_token'));
+
         alert()->success(sprintf("Utilizatorul %s a fost creat!", $request->get('name')), 'Succes!');
         return redirect()->route('users');
     }
@@ -64,6 +78,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $user = $this->repo->find($id);
+
         return view('_backend.users.edit', compact('user'));
     }
 
@@ -76,6 +92,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        $this->repo->update($id, $request->except('_token'));
+
         alert()->success(sprintf("Utilizatorul %s a fost editat!", $request->get('name')), 'Succes!');
         return redirect()->route('users');
     }
@@ -88,6 +106,13 @@ class UserController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        $user = $this->repo->find($id);
+
+        $user->status = 0;
+        $user->update();
+
+        $user->delete($id);
+
         alert()->success( sprintf('Utilizatorul %s a fost sters!', $user->name), 'Succes!' );
         return redirect()->route('users');
     }
@@ -100,7 +125,15 @@ class UserController extends Controller
      */
     public function restore($id)
     {
-        alert()->success( 'Utilizatorul a fost restaurat!', 'Success' );
+        $user = $this->repo
+            ->findWithTrashed($id);
+
+        $user->restore();
+
+        $user->status = 1;
+        $user->update();
+
+        alert()->success( sprintf('Utilizatorul %s a fost restaurat!', $user->name), 'Success' );
         return redirect()->route('users');
     }
 
@@ -112,6 +145,11 @@ class UserController extends Controller
      */
     public function forceDelete($id)
     {
+        $user = $this->repo
+            ->findWithTrashed($id);
+
+        $user->forceDelete($id);
+
         alert()->success( sprintf('Utilizatorul %s a fost sters definitiv!', $user->name), 'Succes!' );
         return redirect()->route('users');
     }
@@ -124,6 +162,12 @@ class UserController extends Controller
      */
     public function mark($id, $status)
     {
+        $user = $this->repo
+            ->find($id);
+
+        $this->repo
+            ->update($id, compact('status'));
+
         $message = ( sprintf("Utilizatorul %s a fost %s", $user->name, ($status == 1 ? "activat!" : "dezactivat!")) );
         alert()->success($message, 'Succes!');
 

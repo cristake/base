@@ -39,9 +39,15 @@
 	</div><!--/.row-->
 @stop
 
+<!-- CUSTOM FOOTER -->
 @section('before-scripts-end') @stop
+
 @section('after-scripts-end')
 	<script>
+		var $table = $('#table');
+
+		$table.bootstrapTable({data: users});
+
 	    function rowStyle(row, index)
 	    {
 	        if ( row.deleted_at ) {
@@ -56,13 +62,13 @@
 		{
 			var mark_url = "{!! route('mark_users', [':id', ':status']) !!}";
 			mark_url = mark_url.replace(':id', row.id);
-			mark_url = mark_url.replace(':status', row.active == true ? 0 : 1);
+			mark_url = mark_url.replace(':status', row.status == true ? 0 : 1);
 
 			var active = '<a href="'+mark_url+'" class="btn btn-warning" title="Dezactiveaza utilizator"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza utilizator"></i>&nbsp;Activ</a> ';
 
 			var inactive = '<a href="'+mark_url+'" class="btn btn-success" title="Activeaza utilizator"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza utilizator"></i>&nbsp;Inactiv</a> ';
 
-			if( row.active )
+			if( row.status )
 				return [active].join('');
 
 			if( row.deleted_at )
