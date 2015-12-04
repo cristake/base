@@ -16,7 +16,7 @@
 	<div class="row">
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
-				Editare rol {!! $role->name !!}"
+				Editare rol "{!! $role->name !!}"
 				{!! HTML::decode( link_to_route('roles', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
 	        </h2>
 	    </div>

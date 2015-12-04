@@ -27,6 +27,7 @@ class UpdateUserRequest extends Request
             'name' => 'required|min:3',
             'email' => 'required|email',
             'role' => 'required',
+            'password_confirmation' => 'required_unless:password,'
         ];
     }
 }

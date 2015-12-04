@@ -18,7 +18,7 @@
 
 	@foreach($roles as $role)
 		<div class="col-sm-2">
-			{!! Form::checkbox('roles[]', $role->id, null, ['class' => 'field']) !!}
+			{!! Form::checkbox('roles[]', $role->id, (isset($ability) && $ability->belongsToRole($role->id) ? true : false ), ['class' => 'field']) !!}
 			{!! Form::label($role->name, ucfirst($role->name), ['class' => 'control-label']) !!}
 		</div>
 	@endforeach

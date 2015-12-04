@@ -100,8 +100,9 @@ class AbilityController extends Controller
     public function edit($id)
     {
         $ability = $this->abilityRepo->find($id);
+        $roles = $this->roleRepo->getAll();
 
-        return view('_backend.abilities.edit', compact('ability'));
+        return view('_backend.abilities.edit', compact('ability', 'roles'));
     }
 
     /**
@@ -113,9 +114,11 @@ class AbilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $role = $this->abilityRepo->update($id, $request->except('_token'));
+        $ability = $this->abilityRepo->update($id, $request->except('_token', 'roles'));
 
-        alert()->success(sprintf("Abilitatea %s a fost editata!", $role->name), 'Succes!');
+        $ability->roles()->sync($request->get('roles'));
+
+        alert()->success(sprintf("Abilitatea %s a fost editata!", $ability->name), 'Succes!');
         return redirect()->route('abilities');
     }
 

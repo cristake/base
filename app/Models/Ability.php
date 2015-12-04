@@ -27,6 +27,16 @@ class Ability extends Model
         $this->attributes['name'] = str_replace( ' ', '_', strtolower($value) );
     }
 
+    /**
+     * Check if a role has a certain ability
+     * @param  integer  $id
+     * @return boolean
+     */
+    public function belongsToRole($id)
+    {
+    	return in_array($id, $this->roles()->lists('id')->all());
+    }
+
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

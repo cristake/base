@@ -27,18 +27,22 @@
 </div>
 
 <!-- ROLES -->
-<div class="form-group {{ $errors->first('role', 'has-error') }}">
-	{!! Form::label('role', 'Roluri', ['class' => 'control-label col-sm-2']) !!}
-	<div class="col-sm-6">
-	{!! Form::select('role', ['' => 'Selecteaza rol'] + $roles, count($user->roles) ? $user->roles->first()->id : null,  ['class' => 'form-control']) !!}
+@can('edit_users')
+	<div class="form-group {{ $errors->first('role', 'has-error') }}">
+		{!! Form::label('role', 'Roluri', ['class' => 'control-label col-sm-2']) !!}
+		<div class="col-sm-6">
+			{!! Form::select('role', ['' => 'Selecteaza rol'] + $roles, count($user->roles) ? $user->roles->first()->id : null,  ['class' => 'form-control']) !!}
+		</div>
+		<div class="col-sm-4">
+			<small>
+				<div class="col-md-1"><i class="fa fa-exclamation-triangle icon-default"></i></div>
+				<div class="col-md-10">Selecteaza un rol pentru utilizator</div>
+			</small>
+		</div>
 	</div>
-	<div class="col-sm-4">
-		<small>
-			<div class="col-md-1"><i class="fa fa-exclamation-triangle icon-default"></i></div>
-			<div class="col-md-10">Selecteaza un rol pentru utilizator</div>
-		</small>
-	</div>
-</div>
+@else
+	{!! Form::hidden('role', count($user->roles) ? $user->roles->first()->id : null,  ['class' => 'form-control', 'readonly']) !!}
+@endcan
 
 <!-- PAROLA -->
 <div class="form-group {{ $errors->first('password', 'has-error') }}">

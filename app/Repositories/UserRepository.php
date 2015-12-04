@@ -31,6 +31,20 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             ->get();
     }
 
+
+    /**
+     * Get a user by their email address
+     * @param  string $email
+     * @return Item
+     */
+    public function findByEmail($email)
+    {
+        return $this->model
+            ->whereEmail($email)
+            ->first();
+    }
+
+
     /**
      * Find a specific resourse including soft deletes
      * @param  integer $id

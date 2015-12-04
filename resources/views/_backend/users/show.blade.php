@@ -1,7 +1,7 @@
 @extends('_backend._layouts.master')
 
 @section('meta')
-    <title>Editare abilitate {!! $ability->name !!}</title>
+    <title>Profil utilizator {!! $user->name !!}</title>
 
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -16,8 +16,7 @@
 	<div class="row">
 	    <div class="col-lg-12">
 	        <h2 class="page-header" id="simple-msg">
-				Editare abilitate "{!! $ability->name !!}"
-				{!! HTML::decode( link_to_route('abilities', '<i class="fa fa-arrow-left"></i> Inapoi', [], ['class' => 'btn btn-primary pull-right']) ) !!}
+				Profil utilizator "{!! $user->name !!}"
 	        </h2>
 	    </div>
 	</div>
@@ -28,10 +27,8 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 
-					<!-- Form Display -->
-					{!! Form::model($ability, ['route' => ['abilities_update', $ability->id], 'class' => 'form-horizontal', 'method' => 'PUT']) !!}
-						@include('_backend.abilities.includes.abilities-form')
-					{!! Form::close() !!}
+					<!-- Display Profile -->
+					@include('_backend.users.includes.users-profile')
 
 				</div><!--/.panel-body-->
 			</div>

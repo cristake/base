@@ -39,6 +39,8 @@ class UserController extends Controller
     {
         $this->userRepo = $userRepo;
         $this->roleRepo = $roleRepo;
+
+        parent::__construct();
     }
 
 	/**
@@ -86,9 +88,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        // 
+        $user = $this->userRepo->find($this->user->id);
+        $roles = $this->roleRepo->listsAll();
+
+        return view('_backend.users.show', compact('user', 'roles'));
     }
 
     /**
@@ -100,9 +105,16 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepo->find($id);
-        $roles = $this->roleRepo->listsAll();
 
-        return view('_backend.users.edit', compact('user', 'roles'));
+        if($this->user->id == $user->id || $this->user->isAdminOrManager())
+        {
+            $roles = $this->roleRepo->listsAll();
+
+            return view('_backend.users.edit', compact('user', 'roles'));
+        }
+
+        alert()->warning('Este permisa doar editarea profilului tau', 'Info!');
+        return redirect()->back();
     }
 
     /**
@@ -114,11 +126,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $user = $this->userRepo->update($id, $request->except('_token'));
-        $user->roles()->sync([$request->get('role')]);
+        $input = empty($request->get('password')) ? $request->except(['_token', 'password']) : $request->except('_token');
+
+        $user = $this->userRepo
+            ->update($id, $input);
+
+        $user->roles()
+            ->sync([$request->get('role')]);
 
         alert()->success(sprintf("Utilizatorul %s a fost editat!", $user->name), 'Succes!');
-        return redirect()->route('users');
+
+        if($this->user->isAdminOrManager())
+            return redirect()->route('users');
+
+        return redirect()->route('users_show');
     }
 
     /**

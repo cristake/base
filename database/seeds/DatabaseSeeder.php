@@ -10,6 +10,8 @@ class DatabaseSeeder extends Seeder
         'pages',
         'roles',
         'user_roles',
+        'abilities',
+        'role_abilities',
     ];
 
     /**
@@ -20,6 +22,8 @@ class DatabaseSeeder extends Seeder
         'PagesTableSeeder',
         'RolesTableSeeder',
         'UserRolesTableSeeder',
+        'AbilitiesTableSeeder',
+        'RoleAbilitiesTableSeeder',
     ];
 
     /**

@@ -7,6 +7,8 @@
 	data-search="true"
 	data-select-item-name="toolbar1"
 	data-pagination="true"
+	data-page-size="25"
+	data-page-list="[25, 50, 100]" 
 	data-sort-name="id"
 	data-sort-order="asc"
 	data-flat="true"

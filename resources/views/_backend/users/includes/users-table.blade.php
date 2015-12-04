@@ -18,7 +18,9 @@
 	        <th data-field="email" data-align="center" data-valign="middle" data-sortable="true">Email</th>
 	        <th data-field="status" data-align="center" data-valign="middle" data-sortable="true" data-formatter="StatusFormatter">Status</th>
 	        <th data-field="updated_at" data-align="center" data-valign="middle" data-sortable="true">Ultima logare</th>
-	        <th data-field="actions" data-align="center" data-valign="middle" data-sortable="false" data-formatter="ActionsFormatter">Actiuni</th>
+	        @can('edit_users')
+		        <th data-field="actions" data-align="center" data-valign="middle" data-sortable="false" data-formatter="ActionsFormatter">Actiuni</th>
+	        @endcan
 	    </tr>
     </thead>
 </table>
