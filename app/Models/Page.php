@@ -4,18 +4,35 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Dimsav\Translatable\Translatable;
 use Auth;
 
 class Page extends Model
 {
-    // use SoftDeletes;
+    use SoftDeletes, Translatable;
+	
+	/**
+     * Translatable columns
+     *
+     * @var array
+     */
+	public $translatedAttributes = ['name', 'slug'];
+
+
+	/**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = ['translations'];
+
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    // protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];
 
 	/**
 	 * The database table used by the model.
@@ -29,7 +46,7 @@ class Page extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'parent_id', 'user_id', 'status'];
+    protected $fillable = [/*'name', 'slug', */'parent_id', 'user_id', 'status'];
 
 	/**
 	 * The attributes that are not mass assignable.
@@ -39,14 +56,14 @@ class Page extends Model
 	protected $guarded = ['id'];
 
     /**
-     * Create the slug from the title
+     * Create the slug from the name
      */
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst( strtolower($value) );
+    // public function setNameAttribute($value) {
+    //     $this->attributes['name'] = ucfirst( strtolower($value) );
 
-        // grab the title and slugify it
-        $this->attributes['slug'] = str_slug($value);
-    }
+    //     // grab the name and slugify it
+    //     $this->attributes['slug'] = str_slug($value);
+    // }
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

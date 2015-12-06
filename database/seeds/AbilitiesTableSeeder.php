@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Ability;
 
 class AbilitiesTableSeeder extends Seeder
 {
@@ -23,9 +22,6 @@ class AbilitiesTableSeeder extends Seeder
 
     public function run()
     {
-        foreach($this->abilities as $ability)
-        {
-        	Ability::create($ability);
-        }
+        DB::table('abilities')->insert($this->abilities);
     }
 }

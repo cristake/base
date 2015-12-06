@@ -1,10 +1,10 @@
 ## Starter BaseApp for Laravel 5.1
 A basic starter app for Laravel 5.1, using:
-- dingo/api
-- tymon/jwt-auth
 - lavary/laravel-menu
 - silber/bouncer
 - laravel/socialite
+- uxweb/sweet-alert
+- laracasts/utilities
 
 
 ### Base To-Do's

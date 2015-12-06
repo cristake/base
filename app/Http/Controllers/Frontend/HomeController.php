@@ -21,6 +21,11 @@ class HomeController extends Controller
         return view('_frontend.home.index', compact('pages'));
     }
 
+    public function page($page, $subpage)
+    {
+        return $subpage;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

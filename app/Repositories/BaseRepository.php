@@ -16,6 +16,15 @@ abstract class BaseRepository
 
 
     /**
+     * Get all resources with their relations
+     */
+    public function getAllWith($relations = [])
+    {
+        return $this->model->with($relations)->get();
+    }
+
+
+    /**
      * Find a specific resource item
      * @param  integer $id 
      * @return Item

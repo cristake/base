@@ -154,6 +154,7 @@ return [
         Lavary\Menu\ServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
     ],
 

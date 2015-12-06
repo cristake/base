@@ -12,7 +12,8 @@
         "uxweb/sweet-alert": "^1.1",
         "lavary/laravel-menu": "dev-master",
         "laravel/socialite": "^2.0",
-        "laracasts/utilities": "^2.1"
+        "laracasts/utilities": "^2.1",
+        "dimsav/laravel-translatable": "^5.4"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

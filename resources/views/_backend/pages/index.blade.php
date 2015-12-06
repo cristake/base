@@ -42,27 +42,45 @@
 @section('before-scripts-end') @stop
 @section('after-scripts-end')
 	<script>
-	    function rowStyle(row, index)
-	    {
-	        if ( row.deleted_at ) {
-	            return {
-	                classes: 'strikethrough warning'
-	            };
-	        }
-	        return {};
-	    }
+		var $table = $('#table');
+
+		$table.bootstrapTable({data: pages});
+		console.log(pages);
+
+		function ParentFormatter(index, row)
+		{
+			$.each(pages, function(index, page)
+			{
+				if(row.parent_id == page.id)
+					parent = page.name;
+				else if(row.parent_id == 0)
+					parent = 'none';
+			});
+
+			return parent;
+		}
+
+		// function rowStyle(row, index)
+		// {
+		//     if ( row.deleted_at ) {
+		//         return {
+		//             classes: 'strikethrough warning'
+		//         };
+		//     }
+		//     return {};
+		// }
 
 		function StatusFormatter(index, row)
 		{
 			var mark_url = "{!! route('mark_pages', [':id', ':status']) !!}";
 			mark_url = mark_url.replace(':id', row.id);
-			mark_url = mark_url.replace(':status', row.active == true ? 0 : 1);
+			mark_url = mark_url.replace(':status', row.status == true ? 0 : 1);
 
 			var active = '<a href="'+mark_url+'" class="btn btn-warning" title="Dezactiveaza pagina"><i class="fa fa-pause" data-toggle="tooltip" data-placement="top" title="" data-original-title="Dezactiveaza pagina"></i>&nbsp;Activa</a> ';
 
 			var inactive = '<a href="'+mark_url+'" class="btn btn-success" title="Activeaza pagina"><i class="fa fa-play" data-toggle="tooltip" data-placement="top" title="" data-original-title="Activeaza pagina"></i>&nbsp;Inactiva</a> ';
 
-			if( row.active )
+			if( row.status )
 				return [active].join('');
 
 			if( row.deleted_at )
@@ -83,7 +101,7 @@
 
 			var create = '<a href="'+create_url+'" class="btn btn-success" title="Adauga submeniuri"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Adauga submeniuri"></i></a> ';
 
-			if( row.sections.data.length > 0 )
+			if( row.sections.length > 0 )
 				return [sections, create].join('');
 			else
 				return [create].join('');
