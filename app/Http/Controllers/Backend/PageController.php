@@ -63,11 +63,7 @@ class PageController extends Controller
      */
     public function store(CreatePageRequest $request)
     {
-        $input = $request->except('_token');
-        // $this->pageRepo->translateOrNew('ro', 'name', $request->get('name'));
-
-        // $page = $this->pageRepo->save();
-        $page = $this->pageRepo->create($input);
+        $page = $this->pageRepo->create( $request->except('_token') );
 
         alert()->success(sprintf("Pagina %s a fost creata!", $page->name), 'Succes!');
         return redirect()->route('pages');

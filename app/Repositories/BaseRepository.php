@@ -4,6 +4,9 @@ namespace App\Repositories;
 
 abstract class BaseRepository
 {
+
+    // Get all records
+
     /**
      * Get all resources without soft deletes
      * @return collection
@@ -24,6 +27,34 @@ abstract class BaseRepository
     }
 
 
+    // Get paginated set of records
+
+
+    // Create a new record
+
+    /**
+     * Creates a new resource
+     * @param  array $request 
+     * @return response
+     */
+    public function create($request)
+    {
+        return $this->model
+            ->create($request);
+    }
+
+    /**
+     * Persist the resource
+     */
+    public function save()
+    {
+        $this->model->save();
+
+        return $this->model;
+    }
+
+    // Get record by it’s primary key
+
     /**
      * Find a specific resource item
      * @param  integer $id 
@@ -36,16 +67,10 @@ abstract class BaseRepository
     }
 
 
-    /**
-     * Creates a new resource
-     * @param  array $request 
-     * @return response
-     */
-    public function create($request)
-    {
-        return $this->model
-            ->create($request);
-    }
+    // Get record by some other attribute
+
+
+    // Update a record
 
     /**
      * Updates a resource
@@ -74,5 +99,8 @@ abstract class BaseRepository
             ->where($params)
             ->get();
     }
+
+
+    // Delete a record
 
 }

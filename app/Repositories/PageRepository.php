@@ -20,17 +20,5 @@ class PageRepository extends BaseRepository implements PageRepositoryInterface
         $this->model = $model;
     }
 
-    // public function translateOrNew($locale, $attr, $value)
-    // {
-    //     $this->model->translateOrNew($locale)->{$attr} = $value;
-    //     return $this->model;
-    // }
-
-    public function save()
-    {
-        $this->model->save();
-
-        return $this->model;
-    }
 
 }
