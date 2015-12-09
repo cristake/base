@@ -23,8 +23,15 @@ class CreatePageRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3',
-        ];
+        // $rules = [
+        //     'name' => 'required|min:3',
+        // ];
+
+        foreach(['ro', 'en'] as $locale)
+        {
+            $rules['name.'.$locale] = 'required|min:3';
+        }
+
+        return $rules;
     }
 }

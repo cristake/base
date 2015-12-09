@@ -21,11 +21,15 @@ class PageTranslation extends Model
     /**
      * Create the slug from the name
      */
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst( strtolower($value) );
+    public function setNameAttribute($values)
+    {
+    	foreach($values as $value)
+    	{
+	        $this->attributes['name'] = ucfirst( strtolower($value) );
 
-        // grab the name and slugify it
-        $this->attributes['slug'] = str_slug($value);
+	        // grab the name and slugify it
+	        $this->attributes['slug'] = str_slug($value);
+    	}
     }
 
 }

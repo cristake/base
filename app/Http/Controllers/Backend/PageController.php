@@ -63,9 +63,14 @@ class PageController extends Controller
      */
     public function store(CreatePageRequest $request)
     {
-        $page = $this->pageRepo->create( $request->except('_token') );
+        foreach(['ro', 'en'] as $locale)
+        {
+            $this->pageRepo->translate($locale, $request->only(['name.'.$locale]));
+        }
 
-        alert()->success(sprintf("Pagina %s a fost creata!", $page->name), 'Succes!');
+        // $this->pageRepo->create( $request->except('_token') );
+
+        alert()->success(sprintf("Pagina %s a fost creata!", $this->pageRepo->translate('ro')->name), 'Succes!');
         return redirect()->route('pages');
     }
 

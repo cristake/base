@@ -1,16 +1,18 @@
 <!-- NUME -->
-<div class="form-group {{ $errors->first('name', 'has-error') }}">
-	{!! Form::label('name', 'Denumire', ['class' => 'control-label col-sm-2']) !!}
-	<div class="col-sm-5">
-		{!! Form::text('name', null,  ['class' => 'form-control', 'placeholder' => 'Denumire', 'autofocus']) !!}
+@foreach(['ro', 'en'] as $locale)
+	<div class="form-group {{ $errors->first(sprintf('name[%s]', $locale), 'has-error') }}">
+		{!! Form::label(sprintf('name[%s]', $locale), sprintf('Denumire (%s)', $locale), ['class' => 'control-label col-sm-2']) !!}
+		<div class="col-sm-5">
+			{!! Form::text(sprintf('name[%s]', $locale), null,  ['class' => 'form-control', 'placeholder' => sprintf('Denumire (%s)', $locale), 'autofocus']) !!}
+		</div>
+		<div class="col-sm-5">
+			<small>
+				<div class="col-md-1"><i class="fa fa-exclamation-triangle icon-default"></i></div>
+				<div class="col-md-10">Denumire pagina</div>
+			</small>
+		</div>
 	</div>
-	<div class="col-sm-5">
-		<small>
-			<div class="col-md-1"><i class="fa fa-exclamation-triangle icon-default"></i></div>
-			<div class="col-md-10">Denumire pagina</div>
-		</small>
-	</div>
-</div>
+@endforeach
 
 <!-- PARENT -->
 <div class="form-group {{ $errors->first('parent_id', 'has-error') }}">

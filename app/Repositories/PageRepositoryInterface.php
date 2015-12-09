@@ -18,5 +18,6 @@ interface PageRepositoryInterface
 
 	public function filter($params);
 
+	public function translate($locale, $attributes = []);
 
 }

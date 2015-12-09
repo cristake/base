@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-// use Dimsav\Translatable\Translatable;
+use Dimsav\Translatable\Translatable;
 use Auth;
 
 class Page extends Model
 {
-    use SoftDeletes; // , Translatable
+    use SoftDeletes, Translatable;
 	
 	/**
      * Translatable columns
      *
      * @var array
      */
-	// public $translatedAttributes = ['name', 'slug'];
+	public $translatedAttributes = ['name', 'slug'];
 
 
 	/**
@@ -24,7 +24,7 @@ class Page extends Model
      *
      * @var array
      */
-    // protected $with = ['translations'];
+    protected $with = ['translations'];
 
 
     /**
@@ -58,12 +58,12 @@ class Page extends Model
     /**
      * Create the slug from the name
      */
-    public function setNameAttribute($value) {
-        $this->attributes['name'] = ucfirst( strtolower($value) );
+    // public function setNameAttribute($value) {
+    //     $this->attributes['name'] = ucfirst( strtolower($value) );
 
-        // grab the name and slugify it
-        $this->attributes['slug'] = str_slug($value);
-    }
+    //     // grab the name and slugify it
+    //     $this->attributes['slug'] = str_slug($value);
+    // }
 
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -82,14 +82,14 @@ class Page extends Model
 	/**
 	 * Setting the authenticated user when creating a resource
      */
-	public function save(array $options = array())
-	{
-	    if( ! $this->created_by)
-	    {
-	        $this->created_by = Auth::id();
-	    }
-	    parent::save($options);
-	}
+	// public function save(array $options = array())
+	// {
+	//     if( ! $this->created_by)
+	//     {
+	//         $this->created_by = Auth::id();
+	//     }
+	//     parent::save($options);
+	// }
 
 	/**
 	 * Setting the authenticated user when updating a resource
