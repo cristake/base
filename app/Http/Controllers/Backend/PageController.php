@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreatePageRequest;
-use App\Http\Requests\UpdatePageRequest;
+use App\Http\Requests\PageRequest;
 use App\Repositories\PageRepositoryInterface;
 use JavaScript;
 
@@ -61,7 +60,7 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePageRequest $request)
+    public function store(PageRequest $request)
     {
         foreach(['ro', 'en'] as $locale)
         {
@@ -111,7 +110,7 @@ class PageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePageRequest $request, $id)
+    public function update(PageRequest $request, $id)
     {
         $page = $this->pageRepo->find($id);
 

@@ -4,8 +4,13 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class UpdateUserRequest extends Request
+class PageRequest extends Request
 {
+    protected $rules = [
+        'name.ro'     => 'required|min:3',
+        'name.en'     => 'required|min:3',
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +28,6 @@ class UpdateUserRequest extends Request
      */
     public function rules()
     {
-        return [
-            'name' => 'required|min:3',
-            'email' => 'required|email',
-            'role' => 'required',
-            'password_confirmation' => 'required_unless:password,'
-        ];
+        return $this->rules;
     }
 }

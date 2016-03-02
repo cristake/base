@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Backend;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UserRequest;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\RoleRepositoryInterface;
 use JavaScript;
@@ -73,7 +72,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(UserRequest $request)
     {
         $user = $this->userRepo->create($request->except('_token'));
         $user->roles()->attach($request->get('role'));
@@ -124,7 +123,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UserRequest $request, $id)
     {
         $input = empty($request->get('password')) ? $request->except(['_token', 'password']) : $request->except('_token');
 
