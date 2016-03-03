@@ -1,9 +1,49 @@
-<!DOCTYPE html>
-<html ng-app="string">
-	<head>
-		<title></title>
-	</head>
-	<body>
+<!doctype html>
+<html ng-app="app">
+    <head>
+        <title>Time Tracker</title>
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+        <link rel="stylesheet" type="text/css" href="node_modules/mdi/css/materialdesignicons.css">
+        <link rel="stylesheet" href="content/css/style.css">
+    </head>
+    <body layout="column">
+        <nav-bar></nav-bar>
 
-	</body>
+        <section class="container" layout="row" flex>
+            <!-- <side-bar></side-bar> -->
+            <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-xs')">
+                <md-content layout-padding>
+                    <md-list>
+                        <md-list-item>
+                            <md-button class="md-primary">
+                                <md-icon md-svg-src="view-dashboard"></md-icon>
+                                Dashboard
+                            </md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-content>
+            </md-sidenav>
+
+            <md-content flex layout-padding>
+                <div layout="column" layout-fill layout-align="top center">
+                    <p>The left sidenav will 'lock open' on a medium (>=960px wide) device.</p>
+                </div>
+                <div flex></div>
+            </md-content>
+        </section>
+
+        <!-- Application Dependencies -->
+        <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+        <script type="text/javascript" src="node_modules/angular-material/angular-material.js"></script>
+        <script type="text/javascript" src="node_modules/angular-route/angular-route.js"></script>
+        <script type="text/javascript" src="node_modules/angular-aria/angular-aria.js"></script>
+        <script type="text/javascript" src="node_modules/angular-animate/angular-animate.js"></script>
+
+        <!--main app module-->
+        <script type="text/javascript" src="app/app.module.js"></script>
+
+        <!--layout module-->
+        <script type="text/javascript" src="app/_layout/layout.module.js"></script>
+        <script type="text/javascript" src="app/_layout/layout.directive.js"></script>
+    </body>
 </html>
