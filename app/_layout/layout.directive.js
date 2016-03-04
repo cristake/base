@@ -21,19 +21,24 @@
 		var vm = this;
 	}
 
+
 	function sideBar() {
 		return {
 			templateUrl: 'app/_layout/sidebar.html',
 			restrict: 'E',
-			scope: {},
 			controller: SidebarController,
-			controllerAs: 'vm'
+			controllerAs: 'vm',
+			scope: {}
 		};
 	}
 
-	function SidebarController()
+	SidebarController.$inject = ['layoutService'];
+
+	function SidebarController(layoutService)
 	{
 		var vm = this;
+
+		vm.menus = layoutService.getMenus();
 	}
 
 })();

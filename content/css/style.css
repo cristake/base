@@ -6,9 +6,19 @@ html, body {
 	padding: 0px;
 }
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+
 md-toolbar h3 {
 	margin: auto;
 	font-weight: 500;
+}
+
+side-bar {
+	margin: 0;
+	padding: 0;
+	max-width: 320px !important;
 }
 
 md-list-item > button {

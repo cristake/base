@@ -1,30 +1,21 @@
 <!doctype html>
-<html ng-app="app">
+<html ng-app="app" ng-cloak>
     <head>
-        <title>Time Tracker</title>
+        <title>BaseApp</title>
         <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
         <link rel="stylesheet" type="text/css" href="node_modules/mdi/css/materialdesignicons.css">
         <link rel="stylesheet" href="content/css/style.css">
     </head>
     <body layout="column">
-        <nav-bar></nav-bar>
+        <nav-bar layout="row"></nav-bar>
 
+        <!-- <div layout-align="space-around" ng-hide="dataLoaded">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div> -->
         <section class="container" layout="row" flex>
-            <!-- <side-bar></side-bar> -->
-            <md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-xs')">
-                <md-content layout-padding>
-                    <md-list>
-                        <md-list-item>
-                            <md-button class="md-primary">
-                                <md-icon md-svg-src="view-dashboard"></md-icon>
-                                Dashboard
-                            </md-button>
-                        </md-list-item>
-                    </md-list>
-                </md-content>
-            </md-sidenav>
+            <side-bar layout="row" flex></side-bar>
 
-            <md-content flex layout-padding>
+            <md-content id="content" flex layout-padding>
                 <div layout="column" layout-fill layout-align="top center">
                     <p>The left sidenav will 'lock open' on a medium (>=960px wide) device.</p>
                 </div>
@@ -44,6 +35,7 @@
 
         <!--layout module-->
         <script type="text/javascript" src="app/_layout/layout.module.js"></script>
+        <script type="text/javascript" src="app/_layout/layout.service.js"></script>
         <script type="text/javascript" src="app/_layout/layout.directive.js"></script>
     </body>
 </html>
