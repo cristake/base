@@ -3,30 +3,18 @@
 
 	angular
 		.module('app', [
-			// Angular Modules
+			// Angular Modules.
 			'ngRoute',
+			'ngResource',
 			'ngMaterial',
+			'ngAnimate',
 
-			// Third party modules.
+			// Third Party Modules.
 
 
-			// Custom Modules
+			// Custom Modules.
+			'app.config',
 			'app.layout',
-		])
-		.config(configFunction);
-
-		configFunction.$inject = ['$routeProvider', '$interpolateProvider', '$mdIconProvider'];
-
-		function configFunction($routeProvider, $interpolateProvider, $mdIconProvider)
-		{
-			$routeProvider
-				.otherwise({ redirectTo: '/' });
-
-			$interpolateProvider
-				.startSymbol('<%')
-				.endSymbol('%>');
-
-			$mdIconProvider
-				.defaultIconSet('content/svg/mdi.svg')
-		}
+			'app.dashboard',
+		]);
 })();

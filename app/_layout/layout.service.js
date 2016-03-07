@@ -5,31 +5,25 @@
 		.module('app.layout')
 		.factory('layoutService', layoutService);
 
-	// layoutService. = [''];
+	layoutService.$inject = ['$resource'];
 
-	function layoutService()
+	function layoutService($resource)
 	{
 		var service = {
 			getMenus: getMenus
 		};
 
+		var Menus = $resource('/data/menus.json');
+
+		function getMenus() {
+            return Menus.query().$promise.then(function(results) {
+                return results;
+            }, function(error) {
+                console.log(error);
+            });
+        }
+
 		return service;
-
-		function getMenus()
-		{
-			var menus = [
-				{
-					name: 'Dashboard',
-					icon: 'view-dashboard'
-				},
-				{
-					name: 'Settings',
-					icon: 'settings'
-				},
-			];
-
-			return menus;
-		}
 	}
 
 })();

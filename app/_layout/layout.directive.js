@@ -8,9 +8,9 @@
 
 	function navBar() {
 		return {
+			replace: true,
 			templateUrl: 'app/_layout/navbar.html',
 			restrict: 'E',
-			scope: {},
 			controller: NavbarController,
 			controllerAs: 'vm'
 		};
@@ -24,21 +24,40 @@
 
 	function sideBar() {
 		return {
+			replace: true,
 			templateUrl: 'app/_layout/sidebar.html',
 			restrict: 'E',
 			controller: SidebarController,
-			controllerAs: 'vm',
-			scope: {}
+			controllerAs: 'vm'
 		};
 	}
 
-	SidebarController.$inject = ['layoutService'];
+	SidebarController.$inject = ['layoutService', '$timeout','ToastService'];
 
-	function SidebarController(layoutService)
+	function SidebarController(layoutService, $timeout, ToastService)
 	{
 		var vm = this;
 
-		vm.menus = layoutService.getMenus();
+		vm.menus 		= [];
+		vm.dataLoaded 	= false;
+		vm.selected 	= null;
+		vm.selectMenu 	= selectMenu;
+
+		function selectMenu(menu) {
+			vm.selected = angular.isNumber(menu) ? vm.menus[menu] : menu;
+			ToastService.show('Clicked ' + vm.selected.name);
+			console.log(vm.selected);
+		}
+
+		$timeout(function() {
+			layoutService.getMenus().then(function(results) {
+				vm.menus = results;
+				vm.dataLoaded = true;
+			}, function(error) {
+				console.log(error);
+			});
+		}, 1000);
+
 	}
 
 })();

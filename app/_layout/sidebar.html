@@ -1,12 +1,18 @@
-<md-sidenav class="md-sidenav-left md-whiteframe-4dp" md-is-locked-open="$mdMedia('gt-xs')">
-    <md-content layout-padding>
-        <md-list>
-            <md-list-item ng-repeat="menu in vm.menus">
-                <md-button class="md-primary">
-                    <md-icon md-svg-src="<% menu.icon %>"></md-icon>
-                    <% menu.name %>
-                </md-button>
-            </md-list-item>
-        </md-list>
-    </md-content>
-</md-sidenav>
+<div>
+    <div layout-align="space-around" ng-hide="vm.dataLoaded">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <md-sidenav class="md-sidenav-left md-whiteframe-4dp fadeIn" md-is-locked-open="$mdMedia('gt-xs')" ng-show="vm.dataLoaded">
+        <md-content layout-padding>
+            <md-list>
+                <md-list-item ng-repeat="menu in vm.menus">
+                    <md-button href="#/{{ menu.name | lowercase }}" ng-class="{'md-primary': vm.selected == menu}" ng-click="vm.selectMenu(menu)">
+                        <md-icon md-svg-src="<% menu.icon %>"></md-icon>
+                        <% menu.name %>
+                    </md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</div>
